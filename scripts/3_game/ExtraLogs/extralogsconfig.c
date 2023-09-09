@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "8";
+    static const string CONFIG_VERSION = "9";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -112,9 +112,13 @@ class LogConfig //LOGGING CONFIG
 	string Info5 = "Setting for Car Actions";
 	bool ShowCarActions = true; //Show Start/Stop actions
 	bool ShowPushingCars = true; //Show Pushing cars
-	bool ShowEnterExitCars = true;//Shows getting in/out of cars
+	bool ShowEnterExitVehicles = true;//Shows getting in/out of cars and boat
 	bool ShowCarDestruction = true; // Show cars getting detroyed
 	bool ShowDoorActions = true; //Show opening or closing of doors
+	string Info6 = "Settings for Boat Actions";
+	bool ShowBoatActions = true; //Show Start/Stop actions
+	bool ShowPushingBoats = true; //Show Pushing boats
+	//bool ShowBoatDestruction = true; // Show Boats getting detroyed
 };
 
 class MapConfig //LIVE MAP CONFIG

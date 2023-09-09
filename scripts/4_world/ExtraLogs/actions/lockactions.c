@@ -5,11 +5,7 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 		if(!action_data.m_Player || !action_data.m_Target) return;
 		if(m_LogConfig.ServerConfig.ShowLockAttach==0) return; //checks to see if we want to see this
 		CombinationLock lock = CombinationLock.Cast(action_data.m_MainItem);//Take Item to clas CombinationLock to get COMBO
-		if(!lock)
-		{
-			Print("CODELOCK NOT FOUND!!!");
-			Print(action_data.m_MainItem);
-		}
+		if(!lock) return;
 		
 		if(m_LogConfig.ServerConfig.ShowLockCode==1 && lock){
 			if(m_LogConfig.ServerConfig.SimpleLockLogs==1){
