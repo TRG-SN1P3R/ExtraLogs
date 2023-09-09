@@ -23,23 +23,28 @@ modded class ActionDropItem : ActionSingleUseBase{
 			SendToCFTools(action_data.m_Player, "","","Dropped "+item);
 			return;
 		}
+		
 		if(m_LogConfig.CustomConfig.EnableCustomItems==1){ //Checks for custom items to be logged
-            if(LogCustomItems.CustomConfig.CustomItem1!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem1)){
+            if(m_LogConfig.CustomConfig.CustomItem1!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem1)){
                  SendToCFTools(action_data.m_Player,"","","Dropped "+item);
                 return;
             }
-			if(LogCustomItems.CustomConfig.CustomItem2!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem2)){
+			if(m_LogConfig.CustomConfig.CustomItem2!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem2)){
                  SendToCFTools(action_data.m_Player,"","","Dropped "+item);
                 return;
             }
-			if(LogCustomItems.CustomConfig.CustomItem3!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem3)){
+			if(m_LogConfig.CustomConfig.CustomItem3!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem3)){
                  SendToCFTools(action_data.m_Player,"","","Dropped "+item);
                 return;
             }
-			if(LogCustomItems.CustomConfig.CustomItem4!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem4)){
+			if(m_LogConfig.CustomConfig.CustomItem4!=""&&item.Contains(m_LogConfig.CustomConfig.CustomItem4)){
                  SendToCFTools(action_data.m_Player,"","","Dropped "+item);
                 return;
             }
 		}
+
+
+
+		
 	}
 }

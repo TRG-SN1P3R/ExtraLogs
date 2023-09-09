@@ -1,30 +1,29 @@
 class ExtraLogsConfig{
- //Stole it from Zenarchist Sorry bro.
 
     static const string CONFIG_VERSION = "2";
 
     // Config location
-	private const static string TRGModFolder = "$profile:\\ExtraLogs\\";
-	private const static string TRGConfigName = "ExtraLogsConfig.json";
+	private const static string ModFolder = "$profile:\\ExtraLogs\\";
+	private const static string ModConfigFile = "ExtraLogsConfig.json";
 
-    // Main config data
+    // CONFIG REF
 	string ConfigVersion = "";
 	ref LogConfig ServerConfig; //Config for gating logic for logs	
 	ref MapConfig LiveMap; //Config for gating logic live map.
 	ref LogCustomItems CustomConfig; // Config for logging items tagged by user.
-
+	ref Testing TestItem; //TESTING
     void Load()
 	{
 		if (GetGame().IsDedicatedServer())
 		{
-			if (FileExist(TRGModFolder + TRGConfigName))
+			if (FileExist(ModFolder + ModConfigFile))
 			{ // If config exists, load file
-				JsonFileLoader<ExtraLogsConfig>.JsonLoadFile(TRGModFolder + TRGConfigName, this);
+				JsonFileLoader<ExtraLogsConfig>.JsonLoadFile(ModFolder + ModConfigFile, this);
 
 				// If version mismatch, backup old version of json before replacing it
 				if (ConfigVersion != CONFIG_VERSION)
 				{
-					JsonFileLoader<ExtraLogsConfig>.JsonSaveFile(TRGModFolder + TRGConfigName + "_old", this);
+					JsonFileLoader<ExtraLogsConfig>.JsonSaveFile(ModFolder + ModConfigFile + "_old", this);
 				}
 				else
 				{
@@ -42,13 +41,13 @@ class ExtraLogsConfig{
 
     void Save()
 	{
-		if (!FileExist(TRGModFolder))
+		if (!FileExist(ModFolder))
 		{	// If config folder doesn't exist, create it.
-			MakeDirectory(TRGModFolder);
+			MakeDirectory(ModFolder);
 		}
 
 		// Save JSON config
-		JsonFileLoader<ExtraLogsConfig>.JsonSaveFile(TRGModFolder + TRGConfigName, this);
+		JsonFileLoader<ExtraLogsConfig>.JsonSaveFile(ModFolder + ModConfigFile, this);
 	}
 
 }
@@ -80,8 +79,8 @@ class LogConfig //LOGGING CONFIG
 class MapConfig //LIVE MAP CONFIG
 {
 	bool ShowStashs = false; //Shows buried stashes on the live map
-	bool ShowTents = false; //Shows tents on map
-	bool ShowShelters = false; //Show Shelters
+	//bool ShowTents = false; //Shows tents on map
+	//bool ShowShelters = false; //Show Shelters
 
 };
 
@@ -95,6 +94,10 @@ class LogCustomItems //LOG ITEM INPUT BY USER
 
 };
 
+class Testing {
+	string CustomItems [] = {"",""};
+};
+
 
 
 
@@ -105,7 +108,7 @@ static ExtraLogsConfig GetLogConfig()
 {
 	if (!m_LogConfig)
 	{
-		Print("[ExtraLogs] Init");
+		Print("[ExtraLogs] Init! Loading config.");
 		m_LogConfig = new ExtraLogsConfig;
 
 		// Only load JSON config on the server
