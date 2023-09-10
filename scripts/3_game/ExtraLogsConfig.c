@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "2";
+    static const string CONFIG_VERSION = "3";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -11,7 +11,8 @@ class ExtraLogsConfig{
 	ref LogConfig ServerConfig; //Config for gating logic for logs	
 	ref MapConfig LiveMap; //Config for gating logic live map.
 	ref LogCustomItems CustomConfig; // Config for logging items tagged by user.
-	ref Testing TestItem; //TESTING
+
+
     void Load()
 	{
 		if (GetGame().IsDedicatedServer())
@@ -35,6 +36,8 @@ class ExtraLogsConfig{
 	    ConfigVersion = CONFIG_VERSION;
         // Set default config
 	    ServerConfig = new LogConfig;
+		LiveMap = new MapConfig;
+		CustomConfig = new LogCustomItems;
 		Save();
 		}
     }
@@ -69,6 +72,7 @@ class LogConfig //LOGGING CONFIG
 	bool ShowSplintAction = true; //Show splints duh
 	bool ShowInjectorActions = true; //Show EPI and otherstuff soon
     bool ShowGasPoison = true; //Show POX
+	bool ShowTentPack = true; //Shows Packing of tents
 	bool ShowLockCode = false; //DANGEROUS! Shows applied lock combo!
 	bool ShowConnectionInfo = true; //Shows Connecting/Disconnecting/disconnected
 	bool SimpleLogs = true; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
@@ -79,23 +83,15 @@ class LogConfig //LOGGING CONFIG
 class MapConfig //LIVE MAP CONFIG
 {
 	bool ShowStashs = false; //Shows buried stashes on the live map
-	//bool ShowTents = false; //Shows tents on map
-	//bool ShowShelters = false; //Show Shelters
+	bool ShowTents = false; //Shows tents on map
+	bool ShowShelters = false; //Show Shelters
 
 };
 
 class LogCustomItems //LOG ITEM INPUT BY USER 
 {
-	bool EnableCustomItems = false; //Allow logic to check for Custom entries. 
-	string CustomItem1="";
-	string CustomItem2="";
-	string CustomItem3="";
-	string CustomItem4="";
-
-};
-
-class Testing {
-	string CustomItems [] = {"",""};
+	autoptr TStringArray TakeMonitorItems={"SeaChest","WoodenCrate","Barrel_","BarrelHoles_"}; //Items to check for Pickup
+	autoptr TStringArray DropMonitorItems={"SeaChest","WoodenCrate","Barrel_","BarrelHoles_"};
 };
 
 
