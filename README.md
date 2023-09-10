@@ -5,8 +5,8 @@ We have decided to open this to the rest of the Dayz Community.
 ## Logged functions:
 
 ### Vanilla
-Action | Function | Description
--|-|-
+Action | Function| Config Options | Description
+-|-|-|-
 'Grabbed Item' | `ActionTakeItemToHands OnExecuteServer()` | Logs when a player drags or holds F on an item. Items watched can be configured or disabled via the Config.json file.
 'has connected' | `MissionServer InvokeOnConnect()` | Logs when a player has finished connecting. CFTools' default log will be when a player initiates joining (so they're in the loading screen). This log fires when the player has finished loading.
 'is disconnecting' | `MissionServer OnClientDisconnectedEvent()` | Logs when a player starts disconnecting (if they press escape > exit). If the player presses ALT+F4, then this message will appear followed by a 'left' message.
