@@ -14,7 +14,7 @@ modded class ActionTakeItemToHands: ActionInteractBase{
 						return;
 					}
 				}
-			}
+		}
 		else{ //if we want basic info
 			foreach(string CheckItem2: m_LogConfig.CustomConfig.TakeMonitorItems){
 				if(CheckItem2=="") return;

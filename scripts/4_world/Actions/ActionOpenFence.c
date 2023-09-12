@@ -1,8 +1,3 @@
-/**
- * This is here because adding ActionPin to
- * monitored aactions doesn't seem to work
- */
-
 modded class ActionOpenFence: ActionSingleUseBase {
 	override void OnStartServer(ActionData action_data) {
 		super.OnStartServer(action_data);

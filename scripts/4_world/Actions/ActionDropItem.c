@@ -13,7 +13,7 @@ modded class ActionDropItem : ActionSingleUseBase{
 			if(CheckItem=="") return;//leaves the loop if there is bad data.
 			
 			if(item.Contains(CheckItem)){ //checks if array contains item
-				SendToCFTools(action_data.m_Player,"","","Dropped"+item);
+				SendToCFTools(action_data.m_Player,"","","Dropped "+item);
 				return;
 			}
 		}

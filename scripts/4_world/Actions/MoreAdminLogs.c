@@ -107,6 +107,7 @@ modded class ContaminationStage3Mdfr: ModifierBase{
 modded class ActionPin: ActionSingleUseBase {
 	override void OnStartServer(ActionData action_data) {
 		super.OnStartServer(action_data);
+        if(m_LogConfig.ServerConfig.ShowGrenadeActions==0) return;//do we want to see this?
         SendToCFTools(action_data.m_Player, "hands", action_data.m_MainItem.GetType(), "pinned");
 	}
 }
@@ -114,6 +115,7 @@ modded class ActionPin: ActionSingleUseBase {
 modded class ActionUnpin: ActionSingleUseBase {
 	override void OnStartServer(ActionData action_data) {
 		super.OnStartServer(action_data);
+        if(m_LogConfig.ServerConfig.ShowGrenadeActions==0) return;//do we want to see this?
         SendToCFTools(action_data.m_Player, "hands", action_data.m_MainItem.GetType(), "unpinned");
 	}
 }
