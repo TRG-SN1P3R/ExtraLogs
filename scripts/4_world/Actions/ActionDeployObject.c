@@ -1,7 +1,3 @@
-/**
- * This is here because adding ActionDeployObject to
- * monitored aactions doesn't seem to work
- */
 
 /*modded class ActionDeployObject: ActionContinuousBase {
 	override void OnFinishProgressServer(ActionData action_data) {

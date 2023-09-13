@@ -101,6 +101,10 @@ class LogCustomItems //LOG ITEM INPUT BY USER
 
 class ModActions{
 	bool ShowCrocoStorageActions = true; //Shows actions for Croco storage Open/Close
+	bool ShowCodeLockActions = true; //Show actions for Codelocks
+	bool ShowCarCoverActions = true; //Show Cover/Uncover actions
+	bool ShowMMGStorageCrateActions = true; //Show MMG Crate actions
+	bool ShowMMGStorageLockerActions = true; //Show Locker Actions
 };
 
 
