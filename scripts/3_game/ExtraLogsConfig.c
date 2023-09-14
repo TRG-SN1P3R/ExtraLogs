@@ -11,7 +11,8 @@ class ExtraLogsConfig{
 	ref LogConfig ServerConfig; //Config for gating logic for logs	
 	ref MapConfig LiveMap; //Config for gating logic live map.
 	ref LogCustomItems CustomConfig; // Config for logging items tagged by user.
-	ref ModActions ModdedActions; //
+	ref ModActions ModdedActions; 
+	ref MMGStorageActions MMGStorage;
 
     void Load()
 	{
@@ -39,6 +40,7 @@ class ExtraLogsConfig{
 		LiveMap = new MapConfig;
 		CustomConfig = new LogCustomItems;
 		ModdedActions = new ModActions;
+		MMGStorage = new MMGStorageActions;
 		Save();
 		}
     }
@@ -103,6 +105,10 @@ class ModActions{
 	bool ShowCrocoStorageActions = true; //Shows actions for Croco storage Open/Close
 	bool ShowCodeLockActions = true; //Show actions for Codelocks
 	bool ShowCarCoverActions = true; //Show Cover/Uncover actions
+};
+
+class MMGStorageActions{
+	bool MMGStorageInstalled = false; 
 	bool ShowMMGStorageCrateActions = true; //Show MMG Crate actions
 	bool ShowMMGStorageLockerActions = true; //Show Locker Actions
 };
