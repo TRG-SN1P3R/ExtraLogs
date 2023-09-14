@@ -1,6 +1,7 @@
 class ExtraLogsConfig{
 
     static const string CONFIG_VERSION = "4";
+	private bool InitConfig = false;
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -13,6 +14,7 @@ class ExtraLogsConfig{
 	ref LogCustomItems CustomConfig; // Config for logging items tagged by user.
 	ref ModActions ModdedActions; 
 	ref MMGStorageActions MMGStorage;
+	ref CrocoStorageActions CrocoStorage;
 
     void Load()
 	{
@@ -41,6 +43,9 @@ class ExtraLogsConfig{
 		CustomConfig = new LogCustomItems;
 		ModdedActions = new ModActions;
 		MMGStorage = new MMGStorageActions;
+		CrocoStorage = new ShowCrocoStorageActions;
+
+		//Save it!
 		Save();
 		}
     }
@@ -102,20 +107,31 @@ class LogCustomItems //LOG ITEM INPUT BY USER
 };
 
 class ModActions{
-	bool ShowCrocoStorageActions = true; //Shows actions for Croco storage Open/Close
 	bool ShowCodeLockActions = true; //Show actions for Codelocks
 	bool ShowCarCoverActions = true; //Show Cover/Uncover actions
 };
 
+class CrocoStorageActions{
+	bool CrocoStorageInstalled = false; //Is Croco Storage installed?
+	string CROCOINFO = "If Croco Storage is present set above to true!";
+	bool ShowCrocoStorageActions = true; //Shows actions for Croco storage Open/Close
+};
+
 class MMGStorageActions{
-	bool MMGStorageInstalled = false; 
+	bool MMGStorageInstalled = false; //Is MMG Storage Installed?
+	string MMGINFO = "If MMG Storage is present set above to true!";
 	bool ShowMMGStorageCrateActions = true; //Show MMG Crate actions
 	bool ShowMMGStorageLockerActions = true; //Show Locker Actions
 };
 
 
 
-
+if(InitConfig==false){
+	GetLogConfig();
+	if(m_LogConfig){
+		InitConfig=true;	
+	}
+}
 
 
 // Save config data
