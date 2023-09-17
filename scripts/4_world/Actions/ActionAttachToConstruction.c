@@ -13,10 +13,10 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 
 			if(m_LogConfig.ServerConfig.SimpleLogs==1){ //Return Lock without Entity ID
 
-			message = action_data.m_MainItem.GetType()+" attached to gate"; //sting to pass to the place log type
+			message = action_data.m_MainItem.GetType()+" attached to gate";//sting to pass to the place log type
 			}
 			else{
-				message=action_data.m_MainItem.GetParent(); //Return Locks Entity ID
+				message=string.Format("%1",action_data.m_MainItem.GetParent())+" attached to gate"; //Return Locks Entity ID
 			}
 			
 				if(check=="CombinationLock"){ //3Dial
@@ -39,7 +39,7 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 
 					lock = CombinationLock.Cast(action_data.m_MainItem);//Take Item to clas CombinationLock to get COMBO
 					if(!lock) return;
-					SendToCFToolsPlace(action_data.m_Player,string.Format("%1 with COMBO:%2",message,lock2.GetCombination()));
+					SendToCFToolsPlace(action_data.m_Player,string.Format("%1 with COMBO:%2",message,lock.GetCombination()));
 					return;
 				}
 	}

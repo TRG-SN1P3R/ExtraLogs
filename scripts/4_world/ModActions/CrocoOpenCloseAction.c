@@ -1,4 +1,4 @@
-#if (m_LogConfig.ModdedActions.CrocoStorageInstalled==1)
+#ifdef EXTRALOGSCROCO
 modded class ActionOpenOpenableCroco: ActionInteractBase{
     override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);

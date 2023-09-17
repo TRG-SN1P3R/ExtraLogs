@@ -43,7 +43,7 @@ class ExtraLogsConfig{
 		CustomConfig = new LogCustomItems;
 		ModdedActions = new ModActions;
 		MMGStorage = new MMGStorageActions;
-		CrocoStorage = new ShowCrocoStorageActions;
+		CrocoStorage = new CrocoStorageActions;
 
 		//Save it!
 		Save();
@@ -95,7 +95,6 @@ class LogConfig //LOGGING CONFIG
 class MapConfig //LIVE MAP CONFIG
 {
 	bool ShowStashs = false; //Shows buried stashes on the live map
-	bool ShowTents = false; //Shows tents on map
 	bool ShowShelters = false; //Show Shelters
 
 };
@@ -112,27 +111,13 @@ class ModActions{
 };
 
 class CrocoStorageActions{
-	bool CrocoStorageInstalled = false; //Is Croco Storage installed?
-	string CROCOINFO = "If Croco Storage is present set above to true!";
 	bool ShowCrocoStorageActions = true; //Shows actions for Croco storage Open/Close
 };
 
 class MMGStorageActions{
-	bool MMGStorageInstalled = false; //Is MMG Storage Installed?
-	string MMGINFO = "If MMG Storage is present set above to true!";
 	bool ShowMMGStorageCrateActions = true; //Show MMG Crate actions
 	bool ShowMMGStorageLockerActions = true; //Show Locker Actions
 };
-
-
-
-if(InitConfig==false){
-	GetLogConfig();
-	if(m_LogConfig){
-		InitConfig=true;	
-	}
-}
-
 
 // Save config data
 ref ExtraLogsConfig m_LogConfig;

@@ -7,7 +7,16 @@ modded class MissionServer {
 			GetGameLabs().AddMonitoredAction("ActionTriggerRemotely");
 			GetGameLabs().AddMonitoredAction("ActionAttachExplosivesTrigger");
             
-            Print("[ExtraLogs] OnInit");
+            Print("[ExtraLogs] Init Logging!");
+
+            #ifdef EXTRALOGSMMG
+                Print("[ExtraLogs] MMG Storage found! Logs are Active.");
+            #endif
+
+            #ifdef EXTRALOGSCROCO
+                Print("[ExtraLogs] Croco Storage found! Logs are Active.");
+            #endif
+
             GetLogConfig();
     }
 }        

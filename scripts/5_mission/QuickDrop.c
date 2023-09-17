@@ -1,6 +1,6 @@
 modded class Inventory: LayoutHolder{
     override void UpdateInterval(){
-        super.UpdateInterval()
+        super.UpdateInterval();
 
         if (GetUApi().GetInputByID(UAUIFastTransferToVicinity)){
             PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());

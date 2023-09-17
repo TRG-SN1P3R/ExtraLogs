@@ -11,7 +11,7 @@ modded class ActionDropItem : ActionSingleUseBase{
 			item = action_data.m_MainItem.GetType(); //Gets item name
 		}
 		else{
-			item = string.Format("%1",action_data.m_MainItem.GetParent());
+			item = string.Format("%1",action_data.m_MainItem.GetParent());//gets items class
 		}
 
 		foreach(string CheckItem: m_LogConfig.CustomConfig.DropMonitorItems){

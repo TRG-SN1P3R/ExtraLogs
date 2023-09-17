@@ -1,15 +1,71 @@
-#if (m_LogConfig.MMGStorageActions.MMGStorageInstalled==1) //Is this enabled?
+#ifdef EXTRALOGSMMG
 
 modded class ActionOpenCloseCrate_noLock: ActionInteractBase{
-    override void OnStartServer( ActionData action_data ){
+     override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);
-        if(m_LogConfig.ModdedActions.ShowMMGStorageCrateAction==0) return;
-        if(!action_data.m_Player || !ction_data.m_Target) return;
-        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"","",string.Format("%1",action_data.m_Target.GetObject()));
+        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(!action_data.m_Player || !action_data.m_Target) return;
+        ItemBase building = ItemBase.Cast(action_data.m_Target.GetObject());
+        bool State = building.IsOpen();
+        string StateAction;
+        if(State==true){
+            StateAction="Opened ";
         }else{
-            SendToCFTools(action_data.m_Player,"","",action_data.m_Target.GetObject().GetType());
+             StateAction="Closed ";
+        }
+        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
+            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),StateAction);
+        }else{
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),StateAction);
         }
     }
 }
+
+modded class ActionOpenCloseCrate: ActionInteractBase{
+    override void OnStartServer( ActionData action_data ){
+        super.OnStartServer(action_data);
+        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(!action_data.m_Player || !action_data.m_Target) return;
+        ItemBase building = ItemBase.Cast(action_data.m_Target.GetObject());
+        bool State = building.IsOpen();
+        string StateAction;
+        if(State==true){
+            StateAction="Opened ";
+        }else{
+             StateAction="Closed ";
+        }
+        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
+            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),StateAction);
+        }else{
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),StateAction);
+        }
+    }
+}
+
+modded class ActionMMGOpen : ActionInteractBase{
+    override void OnStartServer( ActionData action_data ){
+        super.OnStartServer(action_data);
+        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(!action_data.m_Player || !action_data.m_Target) return;
+        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
+            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),"Opened ");
+        }else{
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Opened ");
+        }
+    }
+}
+
+modded class ActionMMGClose: ActionInteractBase{
+     override void OnStartServer( ActionData action_data ){
+        super.OnStartServer(action_data);
+        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(!action_data.m_Player || !action_data.m_Target) return;
+        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
+            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),"Closed ");
+        }else{
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Closed ");
+        }
+    }
+}
+
 #endif
