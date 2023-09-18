@@ -9,15 +9,9 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 			string check=action_data.m_MainItem.GetType(); //Gets item name to gate logic
 			string message;
 			CombinationLock lock;
-
-
-			if(m_LogConfig.ServerConfig.SimpleLogs==1){ //Return Lock without Entity ID
-
+			
 			message = action_data.m_MainItem.GetType()+" attached to gate";//sting to pass to the place log type
-			}
-			else{
-				message=string.Format("%1",action_data.m_MainItem.GetParent())+" attached to gate"; //Return Locks Entity ID
-			}
+			
 			
 				if(check=="CombinationLock"){ //3Dial
 					if(m_LogConfig.ServerConfig.ShowLockCode==0){

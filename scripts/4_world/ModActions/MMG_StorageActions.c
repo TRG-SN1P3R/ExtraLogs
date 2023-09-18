@@ -14,7 +14,7 @@ modded class ActionOpenCloseCrate_noLock: ActionInteractBase{
              StateAction="Closed ";
         }
         if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),StateAction);
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),StateAction);
         }else{
             SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),StateAction);
         }
@@ -35,7 +35,7 @@ modded class ActionOpenCloseCrate: ActionInteractBase{
              StateAction="Closed ";
         }
         if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),StateAction);
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),StateAction);
         }else{
             SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),StateAction);
         }
@@ -48,7 +48,7 @@ modded class ActionMMGOpen : ActionInteractBase{
         if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
         if(!action_data.m_Player || !action_data.m_Target) return;
         if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),"Opened ");
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Opened ");
         }else{
             SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Opened ");
         }
@@ -61,7 +61,7 @@ modded class ActionMMGClose: ActionInteractBase{
         if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
         if(!action_data.m_Player || !action_data.m_Target) return;
         if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject().GetDisplayName())+GetEnitiyIDFromObject(action_data),"Closed ");
+            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Closed ");
         }else{
             SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Closed ");
         }

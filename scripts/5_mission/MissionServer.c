@@ -19,68 +19,62 @@ modded class MissionServer {
 
             GetLogConfig();
     }
-}        
-	
-#ifdef TRADER
-    override void OnUpdate(float timeslice) {
-        /**
-         * OnUpdate() is ugly but it's how Dr's Trader works
-         */
-        super.OnUpdate(timeslice);
-
-		m_Trader_StatUpdateTime += timeslice;
-		if (m_Trader_StatUpdateTime >= m_Trader_StatUpdateTimeMax) {
-			m_Trader_StatUpdateTime = 0;
-
-			for (int j = 0; j < m_Players.Count(); j++) {
-                PlayerBase player = PlayerBase.Cast(m_Players.Get(j));
-				
-				if (!player) continue;
-
-                bool isInSafezone = false;
-
-                for (int k = 0; k < m_Trader_TraderPositions.Count(); k++) {
-					if (vector.Distance(player.GetPosition(), m_Trader_TraderPositions.Get(k)) <= m_Trader_TraderSafezones.Get(k)) isInSafezone = true;
-				}
-
-				if (player.m_Trader_IsInSafezone == false && isInSafezone == true) {
-                    SendToCFTools(player, "", "", "entered a safezone (god mode enabled)");
-                }
-
-                if (player.m_Trader_IsInSafezone == true && isInSafezone == false && player.m_Trader_IsInSafezoneTimeout == 29) {
-                    SendToCFTools(player, "", "", "leaving a safezone (god mode enabled)");
-                }
-
-                if (player.m_Trader_IsInSafezone == true && isInSafezone == false && player.m_Trader_IsInSafezoneTimeout == 1) {
-                    SendToCFTools(player, "", "", "left a safezone (god mode disabled)");
-                }
-
-                if (isInSafezone && player.m_Trader_IsInSafezoneTimeout < m_Trader_SafezoneTimeout) {
-                    SendToCFTools(player, "", "", "re-entered a safezone (god mode enabled)");
-                }
-            }
-        }
-    }
-#endif
+}
 
     override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity) {
-		super.InvokeOnConnect(player, identity);
-
+        super.InvokeOnConnect(player, identity);
+        if(m_LogConfig.ServerConfig.ShowConnectionInfo==0) return;
         SendToCFTools(player, "", "", "has connected");
 	}
 
 	override void OnClientDisconnectedEvent(PlayerIdentity identity, PlayerBase player, int logoutTime, bool authFailed) {
-        SendToCFTools(player, "", "", "is disconnecting");
-
         super.OnClientDisconnectedEvent(identity, player, logoutTime, authFailed);
+        if(m_LogConfig.ServerConfig.ShowConnectionInfo==0) return;
+		SendToCFTools(player, "", "", "is disconnecting");
     }
 
 	override void InvokeOnDisconnect(PlayerBase player) {
+        super.InvokeOnDisconnect(player);
+        if(m_LogConfig.ServerConfig.ShowConnectionInfo==0) return;
         SendToCFTools(player, "", "", "has disconnected");
+    }
 
-		super.InvokeOnDisconnect(player);
+	override void HandleBody(PlayerBase player){
+		super.HandleBody(player);
+		bool ShowLog;
+		if(player){
+			if (player.IsUnconscious() || player.IsRestrained()){
+
+				switch (player.GetKickOffReason()){
+				case EClientKicked.SERVER_EXIT:
+					ShowLog=false;
+					break;
+				case EClientKicked.KICK_ALL_ADMIN:
+					ShowLog=false;
+					break;
+				case EClientKicked.KICK_ALL_SERVER:
+					ShowLog=false;
+					break;
+				case EClientKicked.SERVER_SHUTDOWN:
+					ShowLog=false;
+					break;
+				default:
+					ShowLog=true;
+					break;
+				}
+			}
+		if(ShowLog==true){
+			if(player.IsRestrained){
+				SendToCFTools(player,"",""," was killed after logging out while Restrained");
+			}
+			if(player.IsUnconscious){
+				SendToCFTools(player,"",""," was killed after logging out while Unconscious");
+			}
+		}
+
+		
+		}
 	}
-	
 
 
 }
