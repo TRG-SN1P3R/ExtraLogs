@@ -1,8 +1,10 @@
 modded class ActionTakeItemToHands: ActionInteractBase{
 	override void OnExecuteServer( ActionData action_data ){
 		super.OnExecuteServer(action_data);
+
 		if(!action_data.m_Player) return;
 		if(m_LogConfig.ServerConfig.ShowTakeStorage==0) return; //Checks if we want to show this
+		
 		string item=string.ToString(action_data.m_Target.GetObject()); //Gets Item name
 
 		if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){ //If we want full item details

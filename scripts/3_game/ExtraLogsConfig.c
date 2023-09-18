@@ -12,7 +12,7 @@ class ExtraLogsConfig{
 	ref LogConfig ServerConfig; //Config for gating logic for logs	
 	ref MapConfig LiveMap; //Config for gating logic live map.
 	ref LogCustomItems CustomConfig; // Config for logging items tagged by user.
-	ref ModActions ModdedActions; 
+	ref CarCover CarCover; 
 	ref MMGStorageActions MMGStorage;
 	ref CrocoStorageActions CrocoStorage;
 
@@ -41,7 +41,8 @@ class ExtraLogsConfig{
 	    ServerConfig = new LogConfig;
 		LiveMap = new MapConfig;
 		CustomConfig = new LogCustomItems;
-		ModdedActions = new ModActions;
+		CarCover = new ShowCarActions;
+		CodeLock = new CodeLockActions;
 		MMGStorage = new MMGStorageActions;
 		CrocoStorage = new CrocoStorageActions;
 
@@ -66,17 +67,17 @@ class ExtraLogsConfig{
 
 class LogConfig //LOGGING CONFIG
 {
-
+	string Info1 = "Logs for Storage/Stash";
 	bool ShowBarrelActions = true; //Show OPEN/CLOSE Actions
 	bool ShowTakeStorage = true; //Show taking of items with animations or the {F} key
 	bool ShowDropStorage = true; //Show dropping of items with {G}
 	bool ShowBuryStash = true; //Show buring of stashs
-
+	string Info2 = "Logs for Base Actions";
 	bool ShowBaseDamage = true; //Show basebuilding object destroyed (Buggy!)
 	bool ShowFenceOpen = true; //Show opening of gates
 	bool ShowLockAttach = true; //Show attaching of locks
 	bool ShowLockCode = false; //DANGEROUS! Shows applied lock combo!
-
+	string Info3 = "Logs for Player Actions/Events";
 	bool ShowNVGActions = true; //Show NVG toggle
 	bool ShowShock = true; //Show Uncon/Con	
 	bool ShowBrokenLegs = true; //Show Broken legs after 3 minutes of character life
@@ -84,7 +85,8 @@ class LogConfig //LOGGING CONFIG
 	bool ShowGasPoison = true; //Show POX
 	bool ShowInjectorActions = true; //Show EPI and otherstuff soon
 	bool ShowGrenadeActions = true; //Show pin/unpin
-
+	string Info4 = "Logs for misc Actions/Events";
+	bool ShowPlayerLogOffKill = true //Shows when a player is killed for logging off while uncon or restrained
     bool ShowCarActions = true; //Show Start/Stop actions
 	bool ShowConnectionInfo = true; //Shows Connecting/Disconnecting/disconnected
 	bool SimpleLogs = true; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
@@ -105,18 +107,19 @@ class LogCustomItems //LOG ITEM INPUT BY USER
 	autoptr TStringArray DropMonitorItems={"SeaChest","WoodenCrate","Barrel_","BarrelHoles_"};
 };
 
-class ModActions{
-	bool ShowCodeLockActions = true; //Show actions for Codelocks
-	bool ShowCarCoverActions = true; //Show Cover/Uncover actions
+class CarCoverActions{
+	bool ShowCarCover = true; //Show Cover/Uncover actions
 };
+class CodeLockActions{
+	bool ShowLockAttach = true; //Show CodeLock Attach to walls and objects
+}
 
 class CrocoStorageActions{
 	bool ShowCrocoStorageActions = true; //Shows actions for Croco storage Open/Close
 };
 
 class MMGStorageActions{
-	bool ShowMMGStorageCrateActions = true; //Show MMG Crate actions
-	bool ShowMMGStorageLockerActions = true; //Show Locker Actions
+	bool ShowMMGStorageActions = true; //Show MMG Crate actions
 };
 
 // Save config data

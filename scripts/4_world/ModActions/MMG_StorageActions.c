@@ -3,7 +3,7 @@
 modded class ActionOpenCloseCrate_noLock: ActionInteractBase{
      override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);
-        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
         if(!action_data.m_Player || !action_data.m_Target) return;
         ItemBase building = ItemBase.Cast(action_data.m_Target.GetObject());
         bool State = building.IsOpen();
@@ -24,7 +24,7 @@ modded class ActionOpenCloseCrate_noLock: ActionInteractBase{
 modded class ActionOpenCloseCrate: ActionInteractBase{
     override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);
-        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
         if(!action_data.m_Player || !action_data.m_Target) return;
         ItemBase building = ItemBase.Cast(action_data.m_Target.GetObject());
         bool State = building.IsOpen();
@@ -45,7 +45,7 @@ modded class ActionOpenCloseCrate: ActionInteractBase{
 modded class ActionMMGOpen : ActionInteractBase{
     override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);
-        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
         if(!action_data.m_Player || !action_data.m_Target) return;
         if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
             SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Opened ");
@@ -58,7 +58,7 @@ modded class ActionMMGOpen : ActionInteractBase{
 modded class ActionMMGClose: ActionInteractBase{
      override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);
-        if(m_LogConfig.MMGStorage.ShowMMGStorageCrateActions==0) return;
+        if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
         if(!action_data.m_Player || !action_data.m_Target) return;
         if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
             SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Closed ");

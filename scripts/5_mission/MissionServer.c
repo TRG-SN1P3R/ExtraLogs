@@ -41,6 +41,7 @@ modded class MissionServer {
 
 	override void HandleBody(PlayerBase player){
 		super.HandleBody(player);
+		if(m_LogConfig.ServerConfig.ShowPlayerLogOffKill==0) return;
 		bool ShowLog;
 		if(player){
 			if (player.IsUnconscious() || player.IsRestrained()){
