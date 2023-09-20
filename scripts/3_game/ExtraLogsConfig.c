@@ -1,7 +1,6 @@
 class ExtraLogsConfig{
 
     static const string CONFIG_VERSION = "4";
-	private bool InitConfig = false;
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -12,9 +11,12 @@ class ExtraLogsConfig{
 	ref LogConfig ServerConfig; //Config for gating logic for logs	
 	ref MapConfig LiveMap; //Config for gating logic live map.
 	ref LogCustomItems CustomConfig; // Config for logging items tagged by user.
-	ref CarCover CarCover; 
+	ref CarCoverActions CarCover; 
+	ref CodeLockActions CodeLock;
 	ref MMGStorageActions MMGStorage;
 	ref CrocoStorageActions CrocoStorage;
+	ref TraderActions Trader;
+	ref MuchCarKeyActions MuchCarKey;
 
     void Load()
 	{
@@ -41,10 +43,12 @@ class ExtraLogsConfig{
 	    ServerConfig = new LogConfig;
 		LiveMap = new MapConfig;
 		CustomConfig = new LogCustomItems;
-		CarCover = new ShowCarActions;
+		CarCover = new CarCoverActions;
 		CodeLock = new CodeLockActions;
 		MMGStorage = new MMGStorageActions;
 		CrocoStorage = new CrocoStorageActions;
+		Trader = new TraderActions;
+		MuchCarKey = new MuchCarKeyActions;
 
 		//Save it!
 		Save();
@@ -84,13 +88,15 @@ class LogConfig //LOGGING CONFIG
 	bool ShowSplintAction = true; //Show splints duh
 	bool ShowGasPoison = true; //Show POX
 	bool ShowInjectorActions = true; //Show EPI and otherstuff soon
+	bool ShowUseBloodBag = true; //Show using of blood bags
+	bool ShowTakeBloodBag = true; //Show taking blood
 	bool ShowGrenadeActions = true; //Show pin/unpin
-	string Info4 = "Logs for misc Actions/Events";
-	bool ShowPlayerLogOffKill = true //Shows when a player is killed for logging off while uncon or restrained
+	string Info4 = "Setting and Logs misc. Actions/Events";
     bool ShowCarActions = true; //Show Start/Stop actions
 	bool ShowConnectionInfo = true; //Shows Connecting/Disconnecting/disconnected
 	bool SimpleLogs = true; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
 	bool SimpleLogsStorage = false; //Does not show the Entity ID which is unique only per server restart!
+	float LifeTimeFilter = 180.0; // Life time to filter some messages in seconds 
 	
 
 };
@@ -104,7 +110,7 @@ class MapConfig //LIVE MAP CONFIG
 class LogCustomItems //LOG ITEM INPUT BY USER 
 {
 	autoptr TStringArray TakeMonitorItems={"SeaChest","WoodenCrate","Barrel_","BarrelHoles_"}; //Items to check for Pickup
-	autoptr TStringArray DropMonitorItems={"SeaChest","WoodenCrate","Barrel_","BarrelHoles_"};
+	autoptr TStringArray DropMonitorItems={"SeaChest","WoodenCrate","Barrel_","BarrelHoles_"}; // Items to check for Drop
 };
 
 class CarCoverActions{
@@ -121,6 +127,14 @@ class CrocoStorageActions{
 class MMGStorageActions{
 	bool ShowMMGStorageActions = true; //Show MMG Crate actions
 };
+
+class TraderActions{
+	bool ShowLockActions = true; //Show lock and unlock actions
+};
+
+class MuchCarKeyActions{
+	bool ShowLockActions = true; //Show lock/unlock/pick actions
+}
 
 // Save config data
 ref ExtraLogsConfig m_LogConfig;

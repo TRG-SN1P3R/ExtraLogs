@@ -17,6 +17,15 @@ modded class MissionServer {
                 Print("[ExtraLogs] Croco Storage found! Logs are Active.");
             #endif
 
+            #ifdef Trader
+                Print("[ExtraLogs] Trader found! Logs are Active.");
+            #endif
+
+            #ifdef MuchCarKey
+                Print("[ExtraLogs] MuchCarKey found! Logs are Active.");
+            #endif
+                
+
             GetLogConfig();
     }
 }
@@ -37,45 +46,7 @@ modded class MissionServer {
         super.InvokeOnDisconnect(player);
         if(m_LogConfig.ServerConfig.ShowConnectionInfo==0) return;
         SendToCFTools(player, "", "", "has disconnected");
-    }
-
-	override void HandleBody(PlayerBase player){
-		super.HandleBody(player);
-		if(m_LogConfig.ServerConfig.ShowPlayerLogOffKill==0) return;
-		bool ShowLog;
-		if(player){
-			if (player.IsUnconscious() || player.IsRestrained()){
-
-				switch (player.GetKickOffReason()){
-				case EClientKicked.SERVER_EXIT:
-					ShowLog=false;
-					break;
-				case EClientKicked.KICK_ALL_ADMIN:
-					ShowLog=false;
-					break;
-				case EClientKicked.KICK_ALL_SERVER:
-					ShowLog=false;
-					break;
-				case EClientKicked.SERVER_SHUTDOWN:
-					ShowLog=false;
-					break;
-				default:
-					ShowLog=true;
-					break;
-				}
-			}
-		if(ShowLog==true){
-			if(player.IsRestrained){
-				SendToCFTools(player,"",""," was killed after logging out while Restrained");
-			}
-			if(player.IsUnconscious){
-				SendToCFTools(player,"",""," was killed after logging out while Unconscious");
-			}
-		}
-
-		
-		}
-	}
+    }		
 
 
 }

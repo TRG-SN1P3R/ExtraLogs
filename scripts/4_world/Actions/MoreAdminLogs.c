@@ -10,8 +10,16 @@ override void UnconStop( PlayerBase player ){
         super.UnconStop(player);
         if(m_LogConfig.ServerConfig.ShowShock==0) return;
 		if ( player.IsAlive() ) 	// Do not log uncon stop for dead players
-		{
-		     SendToCFTools(player,"","","regained consciousness" );		
+		{   
+            if(m_LogConfig.ServerConfig.LifeTimeFilter>0){
+                float life = player.StatGet("playtime");//get lifetime of character
+                if(!life) return;
+                if(life>=m_LogConfig.ServerConfig.LifeTimeFilter){ //Gates life time at based on value in logs
+		            SendToCFTools(player,"","","regained consciousness" );
+                }
+                return;
+            }
+            SendToCFTools(player,"","","regained consciousness" );
 		}
 	}
 }
@@ -36,14 +44,14 @@ modded class ActionToggleNVG: ActionBase{
         
     }
 }
-//Log Epipen usage
-modded class EpinephrineMdfr: ModifierBase{
-	override void OnActivate(PlayerBase player){
-		super.OnActivate(player);
-        if(!player) return;
+//log injectors
+modded class ActionInjectSelf: ActionSingleUseBase{
+    override void OnExecuteServer( ActionData action_data ){
+        super.OnExecuteServer(action_data);
+        if(!action_data.m_Player) return;
         if(m_LogConfig.ServerConfig.ShowInjectorActions==0) return;
-        SendToCFTools(player,"","","used an Epipen");
-	}
+         SendToCFTools(action_data.m_Player,"","","used an "+action_data.m_MainItem.GetType()+" injector");
+    }	
 }
 //log breaking legs
 modded class BrokenLegsMdfr: ModifierBase{
@@ -51,11 +59,15 @@ modded class BrokenLegsMdfr: ModifierBase{
         super.OnActivate(player);
         if(!player) return;
         if(m_LogConfig.ServerConfig.ShowBrokenLegs==0) return;
+        if(m_LogConfig.ServerConfig.LifeTimeFilter>0){
         float life = player.StatGet("playtime");//get lifetime of character
         if(!life) return;
-        if(life>=180.0){ //Gates life time at 3 minutes so we don't see freshie shit.
+        if(life>=m_LogConfig.ServerConfig.LifeTimeFilter){  //Gates life time at based on value in logs
         SendToCFTools(player,"","","has broken legs");
+            }
+            return;
         }
+        SendToCFTools(player,"","","has broken legs");
     }
 }
 //log splints to yourself
@@ -120,3 +132,46 @@ modded class ActionUnpin: ActionSingleUseBase {
 	}
 }
 
+modded class ActionGiveBloodSelf: ActionContinuousBase{
+     override void OnEndServer(ActionData action_data){
+        super.OnEndServer(action_data);
+        if(m_LogConfig.ServerConfig.ShowUseBloodBag==0) return;
+        if(!action_data.m_Player) return;
+
+        SendToCFTools(action_data.m_Player,"","","used a blood bag");
+     }
+}
+
+modded class ActionGiveBloodTarget: ActionContinuousBase{
+     override void OnEndServer(ActionData action_data){
+        super.OnEndServer(action_data);
+        if(m_LogConfig.ServerConfig.ShowUseBloodBag==0) return;
+        if(!action_data.m_Player) return;
+        PlayerBase player_target = PlayerBase.Cast(action_data.m_Target.GetObject());
+        if(!player_target) return;
+
+        SendToCFTools(action_data.m_Player,"","","gave a blood transfusion");
+        SendToCFTools(player_target,"","","had received a blood transfusion");
+     }
+}
+
+modded class ActionCollectBloodTarget: ActionContinuousBase{
+    override void OnEndServer(ActionData action_data){
+        super.OnEndServer(action_data);
+        if(m_LogConfig.ServerConfig.ShowTakeBloodBag==0) return;
+        if(!action_data.m_Player) return;
+        PlayerBase player_target = PlayerBase.Cast(action_data.m_Target.GetObject());
+        if(!player_target) return;
+        SendToCFTools(action_data.m_Player,"","","collected blood");
+        SendToCFTools(player_target,"","","had blood taken");
+     }
+}
+
+modded class ActionCollectBloodSelf: ActionContinuousBase{
+    override void OnEndServer(ActionData action_data){
+        super.OnEndServer(action_data);
+        if(m_LogConfig.ServerConfig.ShowTakeBloodBag==0) return;
+        if(!action_data.m_Player) return;
+        SendToCFTools(action_data.m_Player,"","","collected their blood");
+     }
+}
