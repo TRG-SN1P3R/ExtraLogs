@@ -17,17 +17,17 @@ modded class ActionPickLockOnCar: ActionLockUnlockCar {
 }
 
 modded class ActionLockCar: ActionLockUnlockCar {
-	override void OnFinishProgressServer(ActionData action_data) {	
+	override void OnFinishProgressServer(ActionData action_data) {
         super.OnFinishProgressServer(action_data);
 
 		if (!action_data.m_Player || !action_data.m_Target || !action_data.m_MainItem) return;
         if (m_LogConfig.MuchCarKey.ShowLockActions==0) return; //Do we want to see this?
-		if (m_LogConfig.ServerConfig.SimpleLogs==1){//Show only name
-            SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), string.Format("%1",action_data.m_Target.GetObject().GetParent()), "locked");
+        CarScript carScript = CarScript.Cast(action_data.m_Target.GetParent());
+         if(!carScript){
+            SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), string.Format("%1",action_data.m_Target.GetObject().GetType()), "locked");
+            return;
         }
-        else{
-            SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), string.Format("%1",action_data.m_Target.GetObject()), "locked");            
-        }
+        SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), carScript.GetType(), "locked");
     }
 }
 
@@ -37,12 +37,12 @@ modded class ActionUnlockCar: ActionLockUnlockCar {
 
 		if (!action_data.m_Player || !action_data.m_Target || !action_data.m_MainItem) return;
         if (m_LogConfig.MuchCarKey.ShowLockActions==0) return; //Do we want to see this?
-		if (m_LogConfig.ServerConfig.SimpleLogs==1){//Show only name
-            SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), string.Format("%1",action_data.m_Target.GetObject().GetParent()), "unlocked");
+        CarScript carScript = CarScript.Cast(action_data.m_Target.GetParent());
+        if(!carScript){
+            SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), string.Format("%1",action_data.m_Target.GetObject().GetType()), "unlocked");
+            return;
         }
-        else{
-            SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), string.Format("%1",action_data.m_Target.GetObject()), "unlocked");            
+        SendToCFTools(action_data.m_Player, action_data.m_MainItem.GetType(), carScript.GetType(), "unlocked");
         }
     }
-}
 #endif
