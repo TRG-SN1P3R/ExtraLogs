@@ -23,6 +23,7 @@ override void UnconStop( PlayerBase player ){
 		}
 	}
 }
+
 //Log NVGs
 modded class ActionToggleNVG: ActionBase{
     override void Start( ActionData action_data ){
@@ -44,6 +45,7 @@ modded class ActionToggleNVG: ActionBase{
         
     }
 }
+
 //log injectors
 modded class ActionInjectSelf: ActionSingleUseBase{
     override void OnExecuteServer( ActionData action_data ){
@@ -53,6 +55,7 @@ modded class ActionInjectSelf: ActionSingleUseBase{
          SendToCFTools(action_data.m_Player,"","","used an "+action_data.m_MainItem.GetType()+" injector");
     }	
 }
+
 //log breaking legs
 modded class BrokenLegsMdfr: ModifierBase{
     override void OnActivate(PlayerBase player){
@@ -70,6 +73,7 @@ modded class BrokenLegsMdfr: ModifierBase{
         SendToCFTools(player,"","","has broken legs");
     }
 }
+
 //log splints to yourself
 modded class ActionSplintSelf: ActionContinuousBase{
     override void OnFinishProgressServer(ActionData action_data){
@@ -88,6 +92,7 @@ modded class ActionSplintSelf: ActionContinuousBase{
         SendToCFTools(action_data.m_Player,string.Format("%1",action_data.m_Target.GetObject()),"","applied a Splint to");
     }
 }*/
+
 //log stage 1
 modded class ContaminationStage1Mdfr: ModifierBase{
     override protected void OnActivate(PlayerBase player){
@@ -97,6 +102,7 @@ modded class ContaminationStage1Mdfr: ModifierBase{
         SendToCFTools(player,"","","has Stage 1 Gas Poisoning");
     }
 }
+
 //log stage 2
 modded class ContaminationStage2Mdfr: ModifierBase{
     override protected void OnActivate(PlayerBase player){
@@ -106,6 +112,7 @@ modded class ContaminationStage2Mdfr: ModifierBase{
         SendToCFTools(player,"","","has Stage 2 Gas Poisoning");
     }
 }
+
 //log stage 3
 modded class ContaminationStage3Mdfr: ModifierBase{
      override protected void OnActivate(PlayerBase player){
@@ -115,6 +122,7 @@ modded class ContaminationStage3Mdfr: ModifierBase{
         SendToCFTools(player,"","","has Stage 3 Gas Poisoning");
     }
 }
+
 //logs nade actions
 modded class ActionPin: ActionSingleUseBase {
 	override void OnStartServer(ActionData action_data) {
@@ -123,6 +131,7 @@ modded class ActionPin: ActionSingleUseBase {
         SendToCFTools(action_data.m_Player, "hands", action_data.m_MainItem.GetType(), "pinned");
 	}
 }
+
 //logs nade actions
 modded class ActionUnpin: ActionSingleUseBase {
 	override void OnStartServer(ActionData action_data) {

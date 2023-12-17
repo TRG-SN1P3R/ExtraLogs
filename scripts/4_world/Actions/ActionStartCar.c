@@ -3,8 +3,14 @@ modded class ActionStartEngine : ActionContinuousBase {
 		super.OnFinishProgressServer(action_data);
         if (!action_data.m_Player || !action_data.m_Target) return;
 		if (m_LogConfig.ServerConfig.ShowCarActions==0) return; //Do we want to see this?
+		
+		CarScript CarObject = CarScript.Cast(action_data.m_Target.GetObject());
+		if (!CarObject) CarObject = CarScript.Cast(action_data.m_Target.GetParent());
+		EntityAI CarEntity;
+		Class.CastTo(CarEntity, CarObject);
+        if (!CarEntity) return;
 		if (m_LogConfig.ServerConfig.SimpleLogs==1){//Show only name
-        SendToCFTools(action_data.m_Player, "",action_data.m_Target.GetObject().GetType(), "Started Engine ");
+        SendToCFTools(action_data.m_Player, "",string.Format("%1",CarEntity.GetType()), "Started Engine ");
 		return;
 		}
 		
@@ -17,8 +23,14 @@ modded class ActionStopEngine: ActionSingleUseBase{
 		super.OnExecuteServer(action_data);
 		if (!action_data.m_Player || !action_data.m_Target) return;
 		if (m_LogConfig.ServerConfig.ShowCarActions==0) return; //Do we want to see this?
+
+		CarScript CarObject = CarScript.Cast(action_data.m_Target.GetObject());
+		if (!CarObject) CarObject = CarScript.Cast(action_data.m_Target.GetParent());
+		EntityAI CarEntity;
+		Class.CastTo(CarEntity, CarObject);
+        if (!CarEntity) return;
 		if (m_LogConfig.ServerConfig.SimpleLogs==1){//Show only name
-        SendToCFTools(action_data.m_Player, "",action_data.m_Target.GetObject().GetType(), "Stopped Engine ");
+        SendToCFTools(action_data.m_Player, "",string.Format("%1",CarEntity.GetType()), "Stopped Engine ");
 		return;
 		}		
 		SendToCFTools(action_data.m_Player, "",string.Format("%1",action_data.m_Target.GetObject()), "Stopped Engine ");
