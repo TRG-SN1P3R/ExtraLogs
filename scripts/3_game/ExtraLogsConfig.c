@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "4";
+    static const string CONFIG_VERSION = "5";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -91,7 +91,9 @@ class LogConfig //LOGGING CONFIG
 	bool ShowUseBloodBag = true; //Show using of blood bags
 	bool ShowTakeBloodBag = true; //Show taking blood
 	bool ShowGrenadeActions = true; //Show pin/unpin
+	bool ShowTripwires = true; //Show Placement of tripwires
 	string Info4 = "Setting and Logs misc. Actions/Events";
+	bool ShowPushingCars = true; //Show pushing of cars.
     bool ShowCarActions = true; //Show Start/Stop actions
 	bool ShowConnectionInfo = true; //Shows Connecting/Disconnecting/disconnected
 	bool SimpleLogs = true; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
