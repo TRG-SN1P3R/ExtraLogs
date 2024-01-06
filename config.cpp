@@ -5,16 +5,17 @@ class CfgPatches
 		units[]={};
 		weapons[]={};
 		requiredVersion=0.1;
-		requiredAddons[]={
+		requiredAddons[]=
+		{
 			"DZ_Data",
+			"DZ_Scripts",
 			"GameLabs_Scripts"
 		};
 	};
 };
-
 class CfgMods
 {
-	class HH_CFTools
+	class ExtraLogs
 	{
 		dir="ExtraLogs";
 		name="ExtraLogs";
@@ -22,19 +23,37 @@ class CfgMods
 		version="0.9";
 		extra=0;
 		type="mod";
-		dependencies[]={"Game", "World", "Mission"};
-		class defs {
-			class gameScriptModule {
+		dependencies[]=
+		{
+			"Game",
+			"World",
+			"Mission"
+		};
+		class defs
+		{
+			class gameScriptModule
+			{
 				value="";
-				files[]={"ExtraLogs/Scripts/3_Game"};
+				files[]=
+				{
+					"ExtraLogs/Scripts/3_Game"
+				};
 			};
-			class worldScriptModule {
+			class worldScriptModule
+			{
 				value="";
-				files[]={"ExtraLogs/Scripts/4_World"};
+				files[]=
+				{
+					"ExtraLogs/Scripts/4_World"
+				};
 			};
-			class missionScriptModule {
+			class missionScriptModule
+			{
 				value="";
-				files[]={"ExtraLogs/Scripts/5_Mission"};
+				files[]=
+				{
+					"ExtraLogs/Scripts/5_Mission"
+				};
 			};
 		};
 	};
