@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "4";
+    static const string CONFIG_VERSION = "6";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -76,6 +76,7 @@ class LogConfig //LOGGING CONFIG
 	bool ShowTakeStorage = true; //Show taking of items with animations or the {F} key
 	bool ShowDropStorage = true; //Show dropping of items with {G}
 	bool ShowBuryStash = true; //Show buring of stashs
+	bool ShowItemDestruction = true; //Show Storage item destruction
 	string Info2 = "Logs for Base Actions";
 	bool ShowBaseDamage = true; //Show basebuilding object destroyed (Buggy!)
 	bool ShowFenceOpen = true; //Show opening of gates
@@ -92,12 +93,16 @@ class LogConfig //LOGGING CONFIG
 	bool ShowTakeBloodBag = true; //Show taking blood
 	bool ShowGrenadeActions = true; //Show pin/unpin
 	string Info4 = "Setting and Logs misc. Actions/Events";
-    bool ShowCarActions = true; //Show Start/Stop actions
-	bool ShowPushingCars = true; //Show Pushing cars
 	bool ShowConnectionInfo = true; //Shows Connecting/Disconnecting/disconnected
-	bool SimpleLogs = true; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
+	bool SimpleLogs = false; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
 	bool SimpleLogsStorage = false; //Does not show the Entity ID which is unique only per server restart!
 	float LifeTimeFilter = 180.0; // Life time to filter some messages in seconds 
+	string Info5 = "Setting for Car Actions";
+	bool ShowCarActions = true; //Show Start/Stop actions
+	bool ShowPushingCars = true; //Show Pushing cars
+	bool ShowEnterExitCars = true;//Shows getting in/out of cars
+	bool ShowCarDestruction = true; // Show cars getting detroyed
+	
 	
 
 };
@@ -136,7 +141,7 @@ class TraderActions{
 
 class MuchCarKeyActions{
 	bool ShowLockActions = true; //Show lock/unlock/pick actions
-}
+};
 
 // Save config data
 ref ExtraLogsConfig m_LogConfig;

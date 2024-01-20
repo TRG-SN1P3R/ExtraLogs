@@ -24,6 +24,10 @@ modded class MissionServer {
             #ifdef MuchCarKey
                 Print("[ExtraLogs] MuchCarKey found! Logs are Active.");
             #endif
+
+             #ifdef CodeLock
+                Print("[ExtraLogs] CodeLock found! Logs are Active.");
+            #endif
                 
 
             GetLogConfig();

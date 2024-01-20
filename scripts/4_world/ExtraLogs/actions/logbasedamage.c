@@ -1,5 +1,8 @@
 
-modded class Fence:BaseBuildingBase{
+modded class BaseBuildingBase{
+	/*
+	PlayerBase lastHitPlayer;
+	
 	override void OnPartDestroyedServer(Man player, string part_name, int action_id, bool destroyed_by_connected_part = false ){
 	super.OnPartDestroyedServer(player, part_name, action_id );
 		if(m_LogConfig.ServerConfig.ShowBaseDamage==0)return;
@@ -7,6 +10,7 @@ modded class Fence:BaseBuildingBase{
 		string message = "Destroyed Base Object "; //preface of the message.
 		PlayerBase _player = PlayerBase.Cast(player);
 		switch(part_name){
+			
 			case "wall_metal_up":
 				AdminLog="Lower Metal Wall";
 				break;
@@ -30,7 +34,7 @@ modded class Fence:BaseBuildingBase{
 				break;
 			}
 	  message = message+AdminLog;
-	  SendToCFTools(_player,"","",message);
+	  SendToCFTools(lastHitPlayer,"","",message);			
 	}
-
+	*/
 }

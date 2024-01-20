@@ -88,25 +88,52 @@ modded class ActionDestroyCodeLock_MMG{
         float _maxHealth = codelock.GetMaxHealth("", "Health");
         float raidIncrementAmount = _maxHealth / GetDayZGame().GetCodeLockConfig().GetIncrementAmount();
         float tempHealth = codelock.GetHealth()-raidIncrementAmount;
-        float _Health = codelock.GetHealth();
+        float _Health = codelock.GetHealth() - tempHealth;
 
-        if (_Health > 0) 
+        if (_Health <= 0)//Raid is done log it
 		{
             if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-                SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Destoryed CodeLock ");
+                if(GetMMGConfigManagerPlugin().GetConfig().DeleteOnRaid()){
+                    SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Destoryed CodeLock ");
+                    return;
+                }else{
+                    SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Dropped CodeLock ");
+                    return;
+                }
             }else{
-                SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Destoryed CodeLock ");
+                if(GetMMGConfigManagerPlugin().GetConfig().DeleteOnRaid()){
+                    SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Destoryed CodeLock ");
+                    return;
+                }
+                else
+                {
+                    SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Dropped CodeLock ");
+                    return;
+                }
             }
         } 
-		else 
+		else //If raid is not done log it
 		{
             if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-                SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Raiding CodeLock:"+tempHealth+"/"+_Health+" ");
+                SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Raiding CodeLock:"+tempHealth+"/"+_maxHealth+" ");
             }else{
-                SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Raiding CodeLock:"+tempHealth+"/"+_Health+" ");
+                SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Raiding CodeLock:"+tempHealth+"/"+_maxHealth+" ");
             }
         }
     }
+}
+modded class AttachCodeLock_MMG {
+    override void OnExecuteServer(ActionData action_data)
+    {
+    super.OnExecuteServer(action_data);
+    if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0 || m_LogConfig.ServerConfig.ShowLockAttach==0) return; //do we want to see this?
+    if(!action_data.m_Player || !action_data.m_Target) return; //Are our inputs valid?
 
+    if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
+        SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Attached CodeLock ");
+    }else{
+        SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Attached CodeLock ");
+        }
+    }
 }
 #endif

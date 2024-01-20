@@ -184,3 +184,43 @@ modded class ActionCollectBloodSelf: ActionContinuousBase{
         SendToCFTools(action_data.m_Player,"","","collected their blood");
      }
 }
+
+modded class ActionTurnValveUndergroundReservoir{
+	
+	override void OnFinishProgressServer(ActionData action_data)
+	{
+		super.OnFinishProgressServer(action_data);
+		if(!action_data.m_Player) return;
+		SendToCFTools(action_data.m_Player,"","","has interacted with Valve");
+
+	}
+}
+
+modded class ActionUseUndergroundPanel: ActionSingleUseBase{
+	override void OnStartServer( ActionData action_data )
+	{
+		//Because the game hates me 
+		Land_Underground_Panel target =  Land_Underground_Panel.Cast(action_data.m_Target.GetObject());
+		
+		if (!target)
+			return;
+		
+		target.Interact();
+		PunchedCard.Cast(action_data.m_MainItem).OnUse();
+		//WHY!
+		
+		if(!action_data.m_Player) return;
+		SendToCFTools(action_data.m_Player,"","","used Punchcard ");
+	}
+}
+
+modded class ActionUseUndergroundLever: ActionInteractBase{
+	override void OnStartServer( ActionData action_data )
+	{
+		super.OnStartServer(action_data);
+		if(!action_data.m_Player) return;
+		SendToCFTools(action_data.m_Player,"","","opened bunker door ");
+		
+	}
+}
+
