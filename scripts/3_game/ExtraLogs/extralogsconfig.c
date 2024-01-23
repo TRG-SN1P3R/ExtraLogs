@@ -17,6 +17,7 @@ class ExtraLogsConfig{
 	ref CrocoStorageActions CrocoStorage;
 	ref TraderActions Trader;
 	ref MuchCarKeyActions MuchCarKey;
+	ref RagModsActions RagMod;
 
     void Load()
 	{
@@ -49,6 +50,7 @@ class ExtraLogsConfig{
 		CrocoStorage = new CrocoStorageActions;
 		Trader = new TraderActions;
 		MuchCarKey = new MuchCarKeyActions;
+		RagMod = new RagModsActions;
 
 		//Save it!
 		Save();
@@ -141,6 +143,11 @@ class TraderActions{
 
 class MuchCarKeyActions{
 	bool ShowLockActions = true; //Show lock/unlock/pick actions
+};
+
+class RagModsActions {
+	bool ShowRagBaseItemLogs = true;
+	bool SimpleLogs = false; //Show Item ID
 };
 
 // Save config data
