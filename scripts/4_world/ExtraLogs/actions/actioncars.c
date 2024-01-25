@@ -88,12 +88,14 @@ modded class ActionGetOutTransport : ActionBase{
 modded class CarScript{
 
 	protected PlayerBase lastHitPlayer; //Store last player to hit this object
+	protected bool carDestroyed = false; //Prevent double logs
 	
 	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef)
 	{
 		super.EEHitBy(damageResult,damageType,source,component,dmgZone,ammo,modelPos,speedCoef);
 		
 		if(m_LogConfig.ServerConfig.ShowCarActions==0 || m_LogConfig.ServerConfig.ShowCarDestruction==0) return; //Do we want to see this?
+		if(!source) return;
 		PlayerBase m_Player = PlayerBase.Cast(source.GetHierarchyRootPlayer());
 		if(!m_Player) return;
 		if(m_Player==lastHitPlayer) return; //Is stored player the same? IF yes no need to save again.
@@ -105,8 +107,9 @@ modded class CarScript{
     	super.EEHealthLevelChanged(oldLevel,newLevel,zone);
 		if(m_LogConfig.ServerConfig.ShowCarActions==0 || m_LogConfig.ServerConfig.ShowCarDestruction==0) return;//Do we want to see this?
 		if(zone == "Engine" || zone == "Chassis"){ //Only show engine or chassis going to ruined state
-			if(newLevel == GameConstants.STATE_RUINED && lastHitPlayer){ //Pull last playerbase on this object from EEHitBy call.
+			if(newLevel == GameConstants.STATE_RUINED && lastHitPlayer && carDestroyed == false){ //Pull last playerbase on this object from EEHitBy call.
 				SendToCFTools(lastHitPlayer,"","",string.Format("ruined %1",this.ToString()));
+				carDestroyed = true;
 			}
 		}
     }

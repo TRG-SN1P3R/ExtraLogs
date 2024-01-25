@@ -24,11 +24,13 @@ modded class BaseBuildingBase{
 	override void OnPartDestroyedServer(Man player, string part_name, int action_id, bool destroyed_by_connected_part = false ){
 	super.OnPartDestroyedServer(player, part_name, action_id, destroyed_by_connected_part);
 		if(m_LogConfig.ServerConfig.ShowBaseDamage==0)return;
-		if(!lastHitPlayer){
-			Print("[ExtraLogs] BaseBuildingBase.OnPartDestroyedServer: NO Playerbase found!");
-		}
 		string AdminLog=""; //Allow us to modify our item name to more normal lingo.
 		string message = "Destroyed Base Object "; //preface of the message.
+		if(!lastHitPlayer){
+			Print("[ExtraLogs] DEBUG: BaseBuildingBase.OnPartDestroyedServer: NO Playerbase found!");
+			message = "(IGNORE PLAYER) Destroyed Base Object ";
+
+		}
 		switch(part_name){
 			
 			case "wall_metal_up":
@@ -63,7 +65,12 @@ modded class BaseBuildingBase{
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 		if(m_LogConfig.ServerConfig.ShowBaseDamage==0)return;
 		PlayerBase m_Player = PlayerBase.Cast(source.GetHierarchyRootPlayer());
-		if(!m_Player) return;
+
+		if(!m_Player) {
+			Print("[ExtraLogs] DEBUG: BaseBuildingBase.EEHitBy Playerbase not found!");
+			return;
+		}
+
 		float objectHealth = GetHealth(dmgZone, "Health");
 		if(objectHealth<=0){
 		lastHitPlayer = m_Player;

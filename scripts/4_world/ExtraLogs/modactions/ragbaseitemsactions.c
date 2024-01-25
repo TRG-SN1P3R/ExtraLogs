@@ -7,18 +7,18 @@
             super.OnEndServer(action_data);
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
-            ItemBase RagObject = ItemBase.Cast(target.GetObject());
+            ItemBase RagObject = ItemBase.Cast(action_data.m_Target.GetObject());
             if(!RagObject) return; // Skip if we didn't cast
-            string objectState;
+            string tempState="";
             if(RagObject.IsOpen()){ //Decode state of object
-                objectState = "closed"
+                tempState = "closed";
             }else{
-                objectState = "opened"
+                tempState = "opened";
             }
             if(m_LogConfig.RagMod.SimpleLogs==0){
-                SendToGameLabs(action_data.m_Player, "hands", action_data.m_Target.GetObject(), objectState);
+                SendToCFTools(action_data.m_Player, "hands", string.Format("%1",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data)), tempState);
             }else{
-                SendToGameLabs(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), objectState);
+                SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), tempState);
             }
         }
     }
@@ -31,9 +31,9 @@
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
             if(m_LogConfig.RagMod.SimpleLogs==0){
-                SendToGameLabs(action_data.m_Player, "hands", action_data.m_Target.GetObject(), "opened");
+                SendToCFTools(action_data.m_Player, "hands", string.Format("%1",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data)), "opened");
             }else{
-                SendToGameLabs(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "opened");
+                SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "opened");
             }
         }
     }
@@ -46,9 +46,9 @@
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
             if(m_LogConfig.RagMod.SimpleLogs==0){
-                SendToGameLabs(action_data.m_Player, "hands", action_data.m_Target.GetObject(), "closed");
+                SendToCFTools(action_data.m_Player, "hands", string.Format("%1",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data)), "closed");
             }else{
-                SendToGameLabs(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "closed");
+                SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "closed");
             }
         }
 

@@ -6,7 +6,7 @@ modded class ActionCloseBarrel: ActionInteractBase{
             if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){//Show only name
             SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), "Closed");
             }else
-            SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "Closed");
+            SendToCFTools(action_data.m_Player, "",action_data.m_Target.GetObject().GetDisplayName()+GetPersistentIDFromObject(action_data), "Closed");
             }
         
 }
@@ -20,7 +20,7 @@ modded class ActionOpenBarrel: ActionInteractBase{
             if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
             SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), "Opened");
             }else
-            SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "Opened");
+            SendToCFTools(action_data.m_Player, "",action_data.m_Target.GetObject().GetDisplayName()+GetPersistentIDFromObject(action_data), "Opened");
             }        
         
 }
