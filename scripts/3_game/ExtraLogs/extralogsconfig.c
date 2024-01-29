@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "6";
+    static const string CONFIG_VERSION = "7";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -18,6 +18,7 @@ class ExtraLogsConfig{
 	ref TraderActions Trader;
 	ref MuchCarKeyActions MuchCarKey;
 	ref RagModsActions RagMod;
+	ref ParagonStorageActions Paragon;
 
     void Load()
 	{
@@ -51,6 +52,7 @@ class ExtraLogsConfig{
 		Trader = new TraderActions;
 		MuchCarKey = new MuchCarKeyActions;
 		RagMod = new RagModsActions;
+		Paragon = new ParagonStorageActions;
 
 		//Save it!
 		Save();
@@ -147,6 +149,11 @@ class MuchCarKeyActions{
 
 class RagModsActions {
 	bool ShowRagBaseItemLogs = true;
+	bool SimpleLogs = false; //Show Item ID
+};
+
+class ParagonStorageActions {
+	bool ShowPargonStorageLogs = true;
 	bool SimpleLogs = false; //Show Item ID
 };
 

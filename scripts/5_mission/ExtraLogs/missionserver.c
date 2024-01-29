@@ -33,13 +33,17 @@ modded class MissionServer {
                 Print("[ExtraLogs] Rag Base Items found! Logs are Active.")
             #endif
 
+            #ifdef EXTRALOGSPARAGON
+                Print("[ExtraLogs] Paragon Storage found! Logs are Active.")
+            #endif
+
 
         
                 
 
             GetLogConfig();
+        }
     }
-}
 
     override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity) {
         super.InvokeOnConnect(player, identity);

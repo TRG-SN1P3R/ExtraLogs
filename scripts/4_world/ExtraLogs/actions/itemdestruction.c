@@ -21,7 +21,7 @@ modded class Barrel_ColorBase{
         super.EEHealthLevelChanged(oldLevel,newLevel,zone);
 		if(m_LogConfig.ServerConfig.ShowItemDestruction==0) return;
         if(newLevel == GameConstants.STATE_RUINED && lastHitPlayer){
-            SendToCFTools(lastHitPlayer,"","",string.Format("destoryed %1",this.ToString()));
+            SendToCFTools(lastHitPlayer,"","",string.Format("destroyed %1",this.ToString()));
         }
     }
 }
@@ -49,7 +49,7 @@ modded class SeaChest{
         super.EEHealthLevelChanged(oldLevel,newLevel,zone);
 		if(m_LogConfig.ServerConfig.ShowItemDestruction==0) return;
         if(newLevel == GameConstants.STATE_RUINED && lastHitPlayer){
-            SendToCFTools(lastHitPlayer,"","",string.Format("destoryed %1",this.ToString()));
+            SendToCFTools(lastHitPlayer,"","",string.Format("destroyed %1",this.ToString()));
         }
     }
 }
@@ -77,7 +77,7 @@ modded class WoodenCrate{
         super.EEHealthLevelChanged(oldLevel,newLevel,zone);
 		if(m_LogConfig.ServerConfig.ShowItemDestruction==0) return;
         if(newLevel == GameConstants.STATE_RUINED && lastHitPlayer){
-            SendToCFTools(lastHitPlayer,"","",string.Format("destoryed %1",this.ToString()));
+            SendToCFTools(lastHitPlayer,"","",string.Format("destroyed %1",this.ToString()));
         }
     }
 

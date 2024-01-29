@@ -20,6 +20,7 @@ modded class CarScript{
 modded class BaseBuildingBase{
 	
 	protected PlayerBase lastHitPlayer;
+	protected string lastHitAmmo;
 	
 	override void OnPartDestroyedServer(Man player, string part_name, int action_id, bool destroyed_by_connected_part = false ){
 	super.OnPartDestroyedServer(player, part_name, action_id, destroyed_by_connected_part);
@@ -65,11 +66,8 @@ modded class BaseBuildingBase{
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 		if(m_LogConfig.ServerConfig.ShowBaseDamage==0)return;
 		PlayerBase m_Player = PlayerBase.Cast(source.GetHierarchyRootPlayer());
-
-		if(!m_Player) {
-			Print("[ExtraLogs] DEBUG: BaseBuildingBase.EEHitBy Playerbase not found!");
-			return;
-		}
+		
+		if(!m_Player) return;
 
 		float objectHealth = GetHealth(dmgZone, "Health");
 		if(objectHealth<=0){
