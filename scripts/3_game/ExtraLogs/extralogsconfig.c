@@ -106,6 +106,7 @@ class LogConfig //LOGGING CONFIG
 	bool ShowPushingCars = true; //Show Pushing cars
 	bool ShowEnterExitCars = true;//Shows getting in/out of cars
 	bool ShowCarDestruction = true; // Show cars getting detroyed
+	bool ShowDoorActions = true; //Show opening or closing of doors
 	
 	
 

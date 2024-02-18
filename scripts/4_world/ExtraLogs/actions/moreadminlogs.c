@@ -224,3 +224,16 @@ modded class ActionUseUndergroundLever: ActionInteractBase{
 	}
 }
 
+/*modded class M79 extends M79_Base
+{
+
+    override void EEFired(int muzzleType, int mode, string ammoType)
+	{
+        super.EEFired(muzzleType,mode,ammoType);
+        PlayerBase player = PlayerBase.Cast(GetHierarchyRootPlayer());
+        if(!player) return;
+        Print(ammoType);
+        Print(player);
+
+    }
+} */

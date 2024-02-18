@@ -85,6 +85,48 @@ modded class ActionGetOutTransport : ActionBase{
 	}
 }
 
+modded class ActionCloseCarDoorsOutside: ActionCarDoorsOutside{
+	/*override void OnEndServer(ActionData action_data){
+		super.OnEndServer(action_data);
+		if(m_LogConfig.ServerConfig.ShowCarActions==0 || m_LogConfig.ServerConfig.ShowDoorActions==0 ) return; //Do we want to see this?
+		if(!action_data.m_Player) return;
+		CarScript car = CarScript.Cast(action_data.m_Target.GetObject());
+		if(!car) return;
+		Print(car);
+		
+	}*/
+		override void OnStartServer( ActionData action_data ){
+			super.OnStartServer(action_data);
+			if(m_LogConfig.ServerConfig.ShowCarActions==0 || m_LogConfig.ServerConfig.ShowDoorActions==0 ) return; //Do we want to see this?
+			if(!action_data.m_Player) return; 
+			
+			CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
+			if (car)
+			{	
+				CarDoor carDoor = CarDoor.Cast(action_data.m_Target.GetObject());
+				SendToCFTools(action_data.m_Player,"",string.Format("%1",carDoor.GetType()),"closed ");
+			}
+			else return;
+
+		}
+}
+
+modded class ActionOpenCarDoorsOutside: ActionCarDoorsOutside{
+	override void OnStartServer( ActionData action_data ){
+		super.OnStartServer(action_data);
+		if(m_LogConfig.ServerConfig.ShowCarActions==0 || m_LogConfig.ServerConfig.ShowDoorActions==0 ) return; //Do we want to see this?
+		if(!action_data.m_Player) return; 
+			
+		CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
+		if (car)
+		{	
+			CarDoor carDoor = CarDoor.Cast(action_data.m_Target.GetObject());
+			SendToCFTools(action_data.m_Player,"",string.Format("%1",carDoor.GetType()),"opened ");
+		}
+		else return;
+	}
+}
+
 modded class CarScript{
 
 	protected PlayerBase lastHitPlayer; //Store last player to hit this object
@@ -106,6 +148,7 @@ modded class CarScript{
 	{
     	super.EEHealthLevelChanged(oldLevel,newLevel,zone);
 		if(m_LogConfig.ServerConfig.ShowCarActions==0 || m_LogConfig.ServerConfig.ShowCarDestruction==0) return;//Do we want to see this?
+		if(!lastHitPlayer) return;
 		if(zone == "Engine" || zone == "Chassis"){ //Only show engine or chassis going to ruined state
 			if(newLevel == GameConstants.STATE_RUINED && lastHitPlayer && carDestroyed == false){ //Pull last playerbase on this object from EEHitBy call.
 				SendToCFTools(lastHitPlayer,"","",string.Format("ruined %1",this.ToString()));
@@ -114,3 +157,4 @@ modded class CarScript{
 		}
     }
 }
+
