@@ -30,13 +30,16 @@ modded class MissionServer {
             #endif
 
             #ifdef RAG_BASEITEMS
-                Print("[ExtraLogs] Rag Base Items found! Logs are Active.")
+                Print("[ExtraLogs] Rag Base Items found! Logs are Active.");
             #endif
 
             #ifdef EXTRALOGSPARAGON
-                Print("[ExtraLogs] Paragon Storage found! Logs are Active.")
+                Print("[ExtraLogs] Paragon Storage found! Logs are Active.");
             #endif
 
+            #ifdef EXTRALOGSRAGBB
+                Print("[ExtraLogs] RaG Base Building found! Logs are Active.");
+            #endif
 
         
                 

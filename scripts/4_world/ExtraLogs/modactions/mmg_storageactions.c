@@ -1,4 +1,5 @@
 #ifdef EXTRALOGSMMG
+// I am broken fix me
 
 modded class ActionOpenCloseCrate_noLock: ActionInteractBase{
      override void OnStartServer( ActionData action_data ){
@@ -21,7 +22,7 @@ modded class ActionOpenCloseCrate_noLock: ActionInteractBase{
     }
 }
 
-modded class ActionOpenCloseCrate: ActionInteractBase{
+modded class ActionMMGCloseAndOpen: ActionInteractBase{ //Updated 4/4/24
     override void OnStartServer( ActionData action_data ){
         super.OnStartServer(action_data);
         if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
