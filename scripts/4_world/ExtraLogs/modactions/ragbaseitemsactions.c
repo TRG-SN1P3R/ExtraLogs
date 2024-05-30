@@ -16,7 +16,7 @@
                 tempState = "opened";
             }
             if(m_LogConfig.RagMod.SimpleLogs==0){
-                SendToCFTools(action_data.m_Player, "hands", string.Format("%1",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data)), tempState);
+                SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType()+GetEnitiyIDFromObject(action_data), tempState);
             }else{
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), tempState);
             }
@@ -31,7 +31,7 @@
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
             if(m_LogConfig.RagMod.SimpleLogs==0){
-                SendToCFTools(action_data.m_Player, "hands", string.Format("%1",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data)), "opened");
+                SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType()+GetEnitiyIDFromObject(action_data), "opened");
             }else{
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "opened");
             }
@@ -46,7 +46,7 @@
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
             if(m_LogConfig.RagMod.SimpleLogs==0){
-                SendToCFTools(action_data.m_Player, "hands", string.Format("%1",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data)), "closed");
+                SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType()+GetEnitiyIDFromObject(action_data), "closed");
             }else{
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "closed");
             }
