@@ -15,7 +15,7 @@
             }else{
                 tempState = "opened";
             }
-            if(m_LogConfig.RagMod.SimpleLogs==0){
+            if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType()+GetEnitiyIDFromObject(action_data), tempState);
             }else{
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), tempState);
@@ -30,7 +30,7 @@
             super.OnEndServer(action_data);
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
-            if(m_LogConfig.RagMod.SimpleLogs==0){
+            if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType()+GetEnitiyIDFromObject(action_data), "opened");
             }else{
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "opened");
@@ -45,7 +45,7 @@
             super.OnEndServer(action_data);
             if(m_LogConfig.RagMod.ShowRagBaseItemLogs==0) return; //Skip we don't want logs of this
             if(!action_data.m_Player || !action_data.m_Target) return; // Check for player and item
-            if(m_LogConfig.RagMod.SimpleLogs==0){
+            if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType()+GetEnitiyIDFromObject(action_data), "closed");
             }else{
                 SendToCFTools(action_data.m_Player, "hands", action_data.m_Target.GetObject().GetType(), "closed");

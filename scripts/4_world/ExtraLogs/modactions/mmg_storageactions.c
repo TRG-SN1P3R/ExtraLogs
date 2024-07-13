@@ -42,32 +42,6 @@ modded class ActionMMGCloseAndOpen: ActionInteractBase{ //Updated 4/4/24
         }
     }
 }
-
-modded class ActionMMGOpen : ActionInteractBase{
-    override void OnStartServer( ActionData action_data ){
-        super.OnStartServer(action_data);
-        if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
-        if(!action_data.m_Player || !action_data.m_Target) return;
-        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Opened ");
-        }else{
-            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Opened ");
-        }
-    }
-}
-
-modded class ActionMMGClose: ActionInteractBase{
-     override void OnStartServer( ActionData action_data ){
-        super.OnStartServer(action_data);
-        if(m_LogConfig.MMGStorage.ShowMMGStorageActions==0) return;
-        if(!action_data.m_Player || !action_data.m_Target) return;
-        if(m_LogConfig.ServerConfig.SimpleLogsStorage==0){
-            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName()+GetEnitiyIDFromObject(action_data),"Closed ");
-        }else{
-            SendToCFTools(action_data.m_Player,"",action_data.m_Target.GetObject().GetDisplayName(),"Closed ");
-        }
-    }
-}
 modded class ActionDestroyCodeLock_MMG{
 
      override void OnFinishProgressServer(ActionData action_data)

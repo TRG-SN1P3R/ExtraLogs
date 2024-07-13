@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "7";
+    static const string CONFIG_VERSION = "1";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -19,6 +19,8 @@ class ExtraLogsConfig{
 	ref MuchCarKeyActions MuchCarKey;
 	ref RagModsActions RagMod;
 	ref ParagonStorageActions Paragon;
+	ref CarLockActions CarLockMod;
+	ref MuchStuffActions MuchStuff;
 
     void Load()
 	{
@@ -53,6 +55,8 @@ class ExtraLogsConfig{
 		MuchCarKey = new MuchCarKeyActions;
 		RagMod = new RagModsActions;
 		Paragon = new ParagonStorageActions;
+		CarLockMod = new CarLockActions;
+		MuchStuff = new MuchStuffActions;
 
 		//Save it!
 		Save();
@@ -81,6 +85,7 @@ class LogConfig //LOGGING CONFIG
 	bool ShowDropStorage = true; //Show dropping of items with {G}
 	bool ShowBuryStash = true; //Show buring of stashs
 	bool ShowItemDestruction = true; //Show Storage item destruction
+	bool ShowTentActions = true; //Show Opening Closing of tent doors
 	string Info2 = "Logs for Base Actions";
 	bool ShowBaseDamage = true; //Show basebuilding object destroyed (Buggy!)
 	bool ShowFenceOpen = true; //Show opening of gates
@@ -96,6 +101,7 @@ class LogConfig //LOGGING CONFIG
 	bool ShowUseBloodBag = true; //Show using of blood bags
 	bool ShowTakeBloodBag = true; //Show taking blood
 	bool ShowGrenadeActions = true; //Show pin/unpin
+	bool ShowM79Shots = true; //Show shots with M79
 	string Info4 = "Setting and Logs misc. Actions/Events";
 	bool ShowConnectionInfo = true; //Shows Connecting/Disconnecting/disconnected
 	bool SimpleLogs = false; //Does not show the Entity ID which is unique only per server restart! (Car/Fences)
@@ -115,6 +121,7 @@ class MapConfig //LIVE MAP CONFIG
 {
 	bool ShowStashs = false; //Shows buried stashes on the live map
 	bool ShowShelters = false; //Show Shelters
+	bool ShowTents = false; //Show Tents
 
 };
 
@@ -129,6 +136,7 @@ class CarCoverActions{
 };
 class CodeLockActions{
 	bool ShowLockAttach = true; //Show CodeLock Attach to walls and objects
+	bool ShowLockRaid = true; //Show CodeLock Raids
 }
 
 class CrocoStorageActions{
@@ -150,13 +158,29 @@ class MuchCarKeyActions{
 
 class RagModsActions {
 	bool ShowRagBaseItemLogs = true;
-	bool SimpleLogs = false; //Show Item ID
 };
 
 class ParagonStorageActions {
+	string info1 ="For Paragon Storage MOD"
 	bool ShowPargonStorageLogs = true;
-	bool SimpleLogs = false; //Show Item ID
 };
+
+class CarLockActions {
+	string info1 ="For Itachiie Carlock MOD"
+	bool ShowCarLockLogs = true;
+	bool ShowLockActions = true;
+	bool ShowUnlockActions = true;
+	bool ShowMiscActions = true;
+	bool ShowLockPickActions = true;
+};
+
+class MuchStuffActions
+{
+	bool ShowStorageActions = true; // Show open/close actions
+	bool ShowLockActions = true; //Show Lock attach/detach
+	bool ShowLockRaid = true; //Show CODELOCK Raids
+};
+
 
 // Save config data
 ref ExtraLogsConfig m_LogConfig;

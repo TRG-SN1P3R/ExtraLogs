@@ -1,4 +1,4 @@
-modded class ShelterBase:TentBase {
+/*modded class ShelterBase:TentBase {
 
 
 		void ShelterBase() {
@@ -32,3 +32,4 @@ modded class ShelterBase:TentBase {
 			this._registeredInstance = _registeredInstance;
 		}
 }
+*/

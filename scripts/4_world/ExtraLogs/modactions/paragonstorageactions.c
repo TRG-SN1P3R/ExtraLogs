@@ -13,7 +13,7 @@
             else
                 State = "opened ";
 
-            if(m_LogConfig.Paragon.SimpleLogs==1){ //Show only name
+            if(m_LogConfig.m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
                 SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), State);
             else
                 SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), State);
@@ -30,7 +30,7 @@
             if(!action_data.m_Player || !action_data.m_Target) return;
             ItemBase building = ItemBase.Cast(action_data.m_Target.GetObject());
             if(building){
-                if(m_LogConfig.Paragon.SimpleLogs==1){ //Show only name
+                if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
                     SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), "closed ");
                 else
                     SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "closed ");   
@@ -47,7 +47,7 @@
             if(!action_data.m_Player || !action_data.m_Target) return;
             ItemBase building = ItemBase.Cast(action_data.m_Target.GetObject());
             if(building){
-                if(m_LogConfig.Paragon.SimpleLogs==1){ //Show only name
+                if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
                     SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), "opened ");
                 else
                     SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "opened ");   

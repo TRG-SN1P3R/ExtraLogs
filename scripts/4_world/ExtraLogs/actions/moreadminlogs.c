@@ -224,16 +224,26 @@ modded class ActionUseUndergroundLever: ActionInteractBase{
 	}
 }
 
-/*modded class M79 extends M79_Base
+modded class ActionAttachExplosivesTrigger : ActionContinuousBase
+{
+    override void OnFinishProgressServer(ActionData action_data)
+	{
+        super.OnFinishProgressServer(action_data);
+        if(!action_data.m_Player || !action_data.m_Target) return;
+        SendToCFTools(action_data.m_Player,"",string.Format("%1",action_data.m_Target.GetObject()),"attached Remote Detonator to ")
+    }
+}
+
+
+modded class M79 extends M79_Base
 {
 
     override void EEFired(int muzzleType, int mode, string ammoType)
 	{
         super.EEFired(muzzleType,mode,ammoType);
+        if(m_LogConfig.ServerConfig.ShowM79Shots==0) return;
         PlayerBase player = PlayerBase.Cast(GetHierarchyRootPlayer());
-        if(!player) return;
-        Print(ammoType);
-        Print(player);
-
+        if(!player || ammoType!="Bullet_40mm_ChemGas") return;
+        SendToCFTools(player,ammoType,"fired M79 with "," ");
     }
-} */
+} 

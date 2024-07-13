@@ -5,7 +5,7 @@ modded class MissionServer {
 			GetGameLabs().AddMonitoredAction("ActionLockDoors");       
             GetGameLabs().AddMonitoredAction("ActionUnlockDoors");
 			GetGameLabs().AddMonitoredAction("ActionTriggerRemotely");
-			GetGameLabs().AddMonitoredAction("ActionAttachExplosivesTrigger");
+			
             
             Print("[ExtraLogs] Init Logging!");
 
@@ -40,6 +40,15 @@ modded class MissionServer {
             #ifdef EXTRALOGSRAGBB
                 Print("[ExtraLogs] RaG Base Building found! Logs are Active.");
             #endif
+
+            #ifdef EXTRALOGCARLOCKMOD
+                Print("[ExtraLogs] CarLockMod found! Logs are Active.");
+            #endif
+
+            #ifdef EXTRALOGSMUCHSTUFF
+                Print("[ExtraLogs] Much Stuff Pack found! Logs are Active.");
+            #endif
+            
 
         
                 
