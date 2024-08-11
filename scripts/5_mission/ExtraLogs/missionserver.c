@@ -9,7 +9,7 @@ modded class MissionServer {
             
             Print("[ExtraLogs] Init Logging!");
 
-            #ifdef EXTRALOGSMMG
+            #ifdef mmg_storage
                 Print("[ExtraLogs] MMG Storage found! Logs are Active.");
             #endif
 
@@ -33,25 +33,21 @@ modded class MissionServer {
                 Print("[ExtraLogs] Rag Base Items found! Logs are Active.");
             #endif
 
-            #ifdef EXTRALOGSPARAGON
+            #ifdef Paragon_Storage
                 Print("[ExtraLogs] Paragon Storage found! Logs are Active.");
             #endif
 
-            #ifdef EXTRALOGSRAGBB
+            #ifdef RaG_BaseBuilding
                 Print("[ExtraLogs] RaG Base Building found! Logs are Active.");
             #endif
 
-            #ifdef EXTRALOGCARLOCKMOD
+            #ifdef CarLock_Server
                 Print("[ExtraLogs] CarLockMod found! Logs are Active.");
             #endif
 
-            #ifdef EXTRALOGSMUCHSTUFF
+            #ifdef MuchStuffPack
                 Print("[ExtraLogs] Much Stuff Pack found! Logs are Active.");
             #endif
-            
-
-        
-                
 
             GetLogConfig();
         }

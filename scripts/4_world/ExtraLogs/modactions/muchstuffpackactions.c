@@ -1,4 +1,4 @@
-#ifdef EXTRALOGSMUCHSTUFF
+#ifdef MuchStuffPack
 modded class ActionCustomClose
 {
     override void OnStartServer( ActionData action_data )
@@ -37,6 +37,9 @@ modded class ActionRaidCodelockOnMSP
     override void OnFinishProgressServer(ActionData action_data)
     {
         super.OnFinishProgressServer(action_data);
+        if(!action_data.m_Player || !action_data.m_Target) return; //do we have a player and target
+        if(m_LogConfig.MuchStuff.ShowLockActions==0 || m_LogConfig.MuchStuff.ShowLockRaid==0) return;//do we want to see this
+
         if(!GetMuchCodelockConfig())
         {
             return;
@@ -45,10 +48,7 @@ modded class ActionRaidCodelockOnMSP
         {
             return;
         }
-
-        if(!action_data.m_Player || !action_data.m_Target) return; //do we have a player and target
-        if(m_LogConfig.MuchStuff.ShowLockActions==0 || m_LogConfig.MuchStuff.ShowLockRaid==0) return;//do we want to see this
-
+        
         ItemBase itemBase = ItemBase.Cast(action_data.m_Target.GetObject());
         if (itemBase)
         {

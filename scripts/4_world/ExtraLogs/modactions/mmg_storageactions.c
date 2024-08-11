@@ -1,4 +1,4 @@
-#ifdef EXTRALOGSMMG
+#ifdef mmg_storage
 // I am broken fix me
 
 modded class ActionOpenCloseCrate_noLock: ActionInteractBase{

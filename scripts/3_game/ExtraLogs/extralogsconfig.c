@@ -1,6 +1,6 @@
 class ExtraLogsConfig{
 
-    static const string CONFIG_VERSION = "1";
+    static const string CONFIG_VERSION = "8";
 
     // Config location
 	private const static string ModFolder = "$profile:\\ExtraLogs\\";
@@ -90,7 +90,9 @@ class LogConfig //LOGGING CONFIG
 	bool ShowBaseDamage = true; //Show basebuilding object destroyed (Buggy!)
 	bool ShowFenceOpen = true; //Show opening of gates
 	bool ShowLockAttach = true; //Show attaching of locks
+	bool ShowLockUnlock = false; //Show Locks being Unlocked
 	bool ShowLockCode = false; //DANGEROUS! Shows applied lock combo!
+	bool SimpleLockLogs = true; // Removes Item ID on logs
 	string Info3 = "Logs for Player Actions/Events";
 	bool ShowNVGActions = true; //Show NVG toggle
 	bool ShowShock = true; //Show Uncon/Con	
@@ -113,16 +115,13 @@ class LogConfig //LOGGING CONFIG
 	bool ShowEnterExitCars = true;//Shows getting in/out of cars
 	bool ShowCarDestruction = true; // Show cars getting detroyed
 	bool ShowDoorActions = true; //Show opening or closing of doors
-	
-	
-
 };
+
 class MapConfig //LIVE MAP CONFIG
 {
 	bool ShowStashs = false; //Shows buried stashes on the live map
-	bool ShowShelters = false; //Show Shelters
-	bool ShowTents = false; //Show Tents
-
+	bool ShowTents = false; //Show Tents and Shelters
+	autoptr TStringArray TentEnableList={"CarTent","LargeTent"}; //Tents types to log
 };
 
 class LogCustomItems //LOG ITEM INPUT BY USER 

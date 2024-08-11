@@ -1,4 +1,4 @@
-#ifdef EXTRALOGSRAGBB
+#ifdef RaG_BaseBuilding
 modded class ActionDeployObject
 {
     override void OnFinishProgressServer( ActionData action_data )

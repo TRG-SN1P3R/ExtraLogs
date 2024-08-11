@@ -4,8 +4,13 @@ modded class TentBase
     protected bool m_DoorStateChange;
 
     void TentBase() { //when the tent is created
-            if(m_State == PITCHED){ //Checks to see if we want to see this and its pitched
-                GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Call(this._InitGameLabs);
+            if(m_State != PITCHED) return; //Checks to see if we want to see this and its pitched
+            string tempItemName = this.GetType();
+            foreach(string CheckItem: m_LogConfig.LiveMap.TentEnableList){ //Run through String Array to compare to tent object type to array entries. 
+                if(tempItemName.Contains(CheckItem)){
+                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Call(this._InitGameLabs);
+                    break;
+                }
             }
         }
     
@@ -57,7 +62,7 @@ modded class TentBase
 
                 case "ShelterFabric":
                 {
-                if(m_LogConfig.LiveMap.ShowShelters==0) return;
+                if(m_LogConfig.LiveMap.ShowTents==0) return;
                 this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
                 GetGameLabs().RegisterEvent(this._registeredInstance);
                 }
@@ -65,7 +70,7 @@ modded class TentBase
 
                 case "ShelterLeather":
                 {
-                if(m_LogConfig.LiveMap.ShowShelters==0) return;
+                if(m_LogConfig.LiveMap.ShowTents==0) return;
                 this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
                 GetGameLabs().RegisterEvent(this._registeredInstance);
                 }
@@ -73,7 +78,7 @@ modded class TentBase
 
                 default:
                 {
-                if(m_LogConfig.LiveMap.ShowShelters==0) return;
+                if(m_LogConfig.LiveMap.ShowTents==0) return;
                 this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
                 GetGameLabs().RegisterEvent(this._registeredInstance);
                 }
@@ -129,7 +134,6 @@ modded class TentBase
 		}
 		
 		bool is_closed;
-		ResetToggle();
 		
 		for (int i = 0; i < m_ToggleAnimations.Count(); i++)
 		{
@@ -145,57 +149,25 @@ modded class TentBase
 				is_closed = m_OpeningMask & toggle.GetOpeningBit();
 				if (is_closed)
 				{
-					SetAnimationPhase(toggle.GetToggleOff(), 0);
-					AddProxyPhysics(toggle.GetToggleOff());
-					SetAnimationPhase(toggle.GetToggleOn(), 1);
-					RemoveProxyPhysics(toggle.GetToggleOn());
-					m_ToggleAnimations.Set(toggle, false);
-					m_IsToggle = true;
-					m_OpeningMask &= ~toggle.GetOpeningBit();
-					
-					if (selection.Contains("window"))
-					{
-						ManipulateWindow();
-					}
-					
 					if (selection.Contains("entrance") || selection.Contains("door"))
 					{
-						ManipulateEntrance();
                         m_DoorOpen = true;
                         m_DoorStateChange=true;
 					}
-					
-					AnimateCamonetToggle(toggle);
 				}
 				else
 				{
-					SetAnimationPhase(toggle.GetToggleOff(), 1);
-					RemoveProxyPhysics(toggle.GetToggleOff());
-					SetAnimationPhase(toggle.GetToggleOn(), 0);
-					AddProxyPhysics(toggle.GetToggleOn());
-					m_ToggleAnimations.Set(toggle, true);
-					m_IsToggle = false;
-					m_OpeningMask |= toggle.GetOpeningBit();
-					
-					if (selection.Contains("window"))
-					{
-						ManipulateWindow();
-					}
-					
 					if (selection.Contains("entrance") || selection.Contains("door"))
 					{
-						ManipulateEntrance();
                         m_DoorOpen = false;
                         m_DoorStateChange=true;
 					}
-					
-					AnimateCamonetToggle(toggle);
 				}
 			}
 		}
-		SetSynchDirty();
-		SoundSynchRemote();
+        super.ToggleAnimation(selection);
 	}
+    
 
 };
 

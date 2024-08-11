@@ -1,4 +1,4 @@
-#ifdef EXTRALOGCARLOCKMOD
+#ifdef CarLock_Server
 
 modded class ActionDetachCarLockPick: ActionContinuousBase //LOCKPICK
 {

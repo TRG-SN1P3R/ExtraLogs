@@ -1,4 +1,4 @@
-#ifdef EXTRALOGSPARAGON
+#ifdef Paragon_Storage
 
     modded class ActionOpenCloseSC{
         override void OnStartServer( ActionData action_data )
@@ -13,11 +13,10 @@
             else
                 State = "opened ";
 
-            if(m_LogConfig.m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
+            if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
                 SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), State);
-            else
+            }else
                 SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), State);
-	        }
         }
     }
 
@@ -32,9 +31,8 @@
             if(building){
                 if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
                     SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), "closed ");
-                else
+                }else
                     SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "closed ");   
-                }  
             }
 	    }
     }
@@ -49,9 +47,8 @@
             if(building){
                 if(m_LogConfig.ServerConfig.SimpleLogsStorage==1){ //Show only name
                     SendToCFTools(action_data.m_Player, "", action_data.m_Target.GetObject().GetType(), "opened ");
-                else
-                    SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "opened ");   
-                }  
+                }else
+                    SendToCFTools(action_data.m_Player, "", string.Format("%1", action_data.m_Target.GetObject()), "opened ");    
             }
 	    }
     }
