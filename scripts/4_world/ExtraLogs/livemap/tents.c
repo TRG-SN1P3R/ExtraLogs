@@ -3,87 +3,81 @@ modded class TentBase
     protected bool m_DoorOpen;
     protected bool m_DoorStateChange;
 
-    void TentBase() { //when the tent is created
-            if(m_State != PITCHED) return; //Checks to see if we want to see this and its pitched
-            string tempItemName = this.GetType();
-            foreach(string CheckItem: m_LogConfig.LiveMap.TentEnableList){ //Run through String Array to compare to tent object type to array entries. 
-                if(tempItemName.Contains(CheckItem)){
-                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Call(this._InitGameLabs);
-                    break;
-                }
-            }
-        }
-    
-    
     ref _Event _registeredInstance;
     
     private void _InitGameLabs() { //create the map icon and track this item
-            switch(string.Format("%1",this.GetType()))
-            {
-                case "PartyTent":
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
-                
-                case "MediumTent":
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
 
-                case "LargeTent":
+            foreach(string CheckItem: m_LogConfig.LiveMap.TentEnableList){ //Run through String Array to compare to tent object type to array entries. 
+                if(this.GetType()==CheckItem)
                 {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
+                    switch(this.GetType())
+                    {
+                        case "PartyTent":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
+                        
+                        case "MediumTent":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
 
-                case "CarTent":
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "garage-car", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
+                        case "LargeTent":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
 
-                case "ShelterStick":
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
+                        case "CarTent":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "garage-car", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
 
-                case "ShelterFabric":
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
+                        case "ShelterStick":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
 
-                case "ShelterLeather":
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
+                        case "ShelterFabric":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
 
-                default:
-                {
-                if(m_LogConfig.LiveMap.ShowTents==0) return;
-                this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
-                GetGameLabs().RegisterEvent(this._registeredInstance);
-                }
-                break;
+                        case "ShelterLeather":
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "campground", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
 
+                        default:
+                        {
+                        if(m_LogConfig.LiveMap.ShowTents==0) return;
+                        this._registeredInstance = new _Event(string.Format("%1",this.GetType()), "warehouse", this);
+                        GetGameLabs().RegisterEvent(this._registeredInstance);
+                        }
+                        break;
+                    }
+                    break; //WE FOUND A MATCH! 
+                }
             }
         }
 
@@ -168,6 +162,16 @@ modded class TentBase
         super.ToggleAnimation(selection);
 	}
     
+
+
+     // Public API
+    _Event _GetEventInstance() {
+        return this._registeredInstance;
+    }
+
+    void _SetEventInstance(_Event _registeredInstance) {
+        this._registeredInstance = _registeredInstance;
+    }
 
 };
 

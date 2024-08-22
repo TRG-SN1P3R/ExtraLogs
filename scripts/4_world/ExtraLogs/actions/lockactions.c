@@ -4,7 +4,14 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 		super.OnStartServer(action_data);
 		if(!action_data.m_Player || !action_data.m_Target) return;
 		if(m_LogConfig.ServerConfig.ShowLockAttach==0) return; //checks to see if we want to see this
+		string check = action_data.m_MainItem.GetType();
+		if(check != "CombinationLock" || check != "CombinationLock4") return;
 		CombinationLock lock = CombinationLock.Cast(action_data.m_MainItem);//Take Item to clas CombinationLock to get COMBO
+		if(!lock)
+		{
+			Print("CODELOCK NOT FOUND!!!");
+			Print(action_data.m_MainItem);
+		}
 		
 		if(m_LogConfig.ServerConfig.ShowLockCode==1 && lock){
 			if(m_LogConfig.ServerConfig.SimpleLockLogs==1){
@@ -20,10 +27,10 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 
 		if(m_LogConfig.ServerConfig.SimpleLockLogs==1)
 		{
-			SendToCFTools(action_data.m_Player,"",string.Format("%1 to %2", action_data.m_MainItem.GetType(), action_data.m_Target.GetObject().GetType()),"attached "); //shows lock id and fence id
+			SendToCFTools(action_data.m_Player,"",string.Format("%1 to %2", action_data.m_MainItem.GetType(), action_data.m_Target.GetObject().GetType()),"attached "); //show simple logs
 			return;
 		}
-		SendToCFTools(action_data.m_Player,"",string.Format("%1 to %2", lock, action_data.m_Target.GetObject()),"attached "); //show simple logs
+		SendToCFTools(action_data.m_Player,"",string.Format("%1 to %2", action_data.m_MainItem, action_data.m_Target.GetObject()),"attached "); //shows lock id and fence id
 	}
 }
 
@@ -46,7 +53,7 @@ modded class ActionDialCombinationLockOnTarget {
 					if(m_LogConfig.ServerConfig.SimpleLockLogs==1){
 						SendToCFTools(action_data.m_Player,"",combination_lock.GetType(),"unlocked ");
 					}else
-						SendToCFTools(action_data.m_Player,"",string.Format("%1", combination_lock,),"unlocked ");
+						SendToCFTools(action_data.m_Player,"",string.Format("%1", combination_lock),"unlocked ");
 				}
 
 
