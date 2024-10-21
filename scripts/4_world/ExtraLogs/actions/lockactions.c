@@ -4,8 +4,6 @@ modded class ActionAttachToConstruction: ActionSingleUseBase {
 		super.OnStartServer(action_data);
 		if(!action_data.m_Player || !action_data.m_Target) return;
 		if(m_LogConfig.ServerConfig.ShowLockAttach==0) return; //checks to see if we want to see this
-		string check = action_data.m_MainItem.GetType();
-		if(check != "CombinationLock" || check != "CombinationLock4") return;
 		CombinationLock lock = CombinationLock.Cast(action_data.m_MainItem);//Take Item to clas CombinationLock to get COMBO
 		if(!lock)
 		{

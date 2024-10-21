@@ -11,7 +11,7 @@ modded class ActionLockDoors: ActionContinuousBase
 			int doorIndex = building.GetDoorIndex(action_data.m_Target.GetComponentIndex());
 			if ( doorIndex != -1 )
 			{
-				SendToCFTools(action_data.m_Player,"","",string.Format("Locked %1",action_data.m_Target.GetObject().GetType()));
+				SendToCFTools(action_data.m_Player,"","",string.Format("Locked %1",action_data.m_Target.GetObject()));
 			}		
 		}
     }
@@ -30,7 +30,7 @@ modded class ActionUnlockDoors: ActionContinuousBase
 			int doorIndex = building.GetDoorIndex(action_data.m_Target.GetComponentIndex());
 			if ( doorIndex != -1 )
 			{
-				SendToCFTools(action_data.m_Player,"","",string.Format("Unlocked %1",action_data.m_Target.GetObject().GetType()));
+				SendToCFTools(action_data.m_Player,"","",string.Format("Unlocked %1",action_data.m_Target.GetObject()));
 			}		
 		}
     }

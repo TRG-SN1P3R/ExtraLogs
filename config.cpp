@@ -20,7 +20,7 @@ class CfgMods
 		dir="ExtraLogs";
 		name="ExtraLogs";
 		author="@TRG_SN1P3R";
-		version="0.9";
+		version="1.2";
 		extra=0;
 		type="mod";
 		dependencies[]=

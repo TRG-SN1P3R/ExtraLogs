@@ -2,6 +2,8 @@ modded class MissionServer {
     override void OnInit() {
 		super.OnInit();
         if (GetGameLabs().IsServer()) {
+			GetGameLabs().AddMonitoredAction("ActionLockDoors");       
+            GetGameLabs().AddMonitoredAction("ActionUnlockDoors");
 			GetGameLabs().AddMonitoredAction("ActionTriggerRemotely");
 			
             

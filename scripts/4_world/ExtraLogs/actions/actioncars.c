@@ -43,10 +43,10 @@ modded class ActionPushCar : ActionContinuousBase{
 		
 		ActionPushCarData data = ActionPushCarData.Cast(action_data);
 		if (m_LogConfig.ServerConfig.SimpleLogs==0){//Show Full info
-			SendToCFTools(action_data.m_Player, "",string.Format("%1",data.m_Car.ToString()), "Pushed ");
+			SendToCFTools(action_data.m_Player, "",string.Format("%1",data.m_Vehicle.ToString()), "Pushed ");
 			return;
 		}
-			SendToCFTools(action_data.m_Player, "",string.Format("%1",data.m_Car.GetType()), "Pushed ");
+			SendToCFTools(action_data.m_Player, "",string.Format("%1",data.m_Vehicle.GetType()), "Pushed ");
 		
 	}
 }
@@ -78,10 +78,10 @@ modded class ActionGetOutTransport : ActionBase{
 		if(!gotActionData) return;
 		
 		if(m_LogConfig.ServerConfig.SimpleLogs==0){//Show Full info
-			SendToCFTools(action_data.m_Player,"",string.Format("%1",gotActionData.m_Car.ToString()),"got out of ");
+			SendToCFTools(action_data.m_Player,"",string.Format("%1",gotActionData.m_Vehicle.ToString()),"got out of "); //FUCK YOU BOATS
 			return;
 		}
-		SendToCFTools(action_data.m_Player,"",string.Format("%1",gotActionData.m_Car.GetType()),"got out of ");
+		SendToCFTools(action_data.m_Player,"",string.Format("%1",gotActionData.m_Vehicle.GetType()),"got out of ");//FUCK YOU BOATS
 	}
 }
 
